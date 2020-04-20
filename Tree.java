@@ -5,8 +5,7 @@ public class Tree extends Obstacle{
 
     public Tree(Coordinates pivot, int width, int height, String symbol, String name) {
         super(pivot, width, height, symbol);
-        this.name = "Tree";
-        // super.symbol = "\ud83c\udf32";
+        this.name = name;
     }
 
     public String getName() {

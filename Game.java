@@ -5,6 +5,7 @@ import java.util.ArrayList;
 class Game extends KeyAdapter {
     
     private Player player;
+    private GameObject apple;
     private final int width = 20;
     private final int height = 20;
     private ArrayList<Obstacle> obstacles;
