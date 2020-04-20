@@ -4,12 +4,16 @@ import java.awt.event.KeyEvent;
 class Game extends KeyAdapter {
     
     private Player player;
+    private GameObject apple;
     private final int width = 20;
     private final int height = 20;
 
 
     public Game() {
         player = new Player();
+        Coordinates applecoo1 = new Coordinates(12, 7);
+        apple = new Apple(applecoo1);
+
     }
 
     @Override
@@ -40,6 +44,7 @@ class Game extends KeyAdapter {
     private void printBoard() {
         String[][] board  = new String[width][height];
         board[this.player.getCoord().getX()][this.player.getCoord().getY()] = player.getSymbol();
+        board[this.apple.getCoordinates().getX()][this.apple.getCoordinates().getY()] = apple.getSymbol();
 
         for(int i = 0; i< width;  i++) {
             for(int j = 0; j< height; j++) {
