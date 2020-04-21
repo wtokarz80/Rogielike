@@ -1,5 +1,9 @@
 
 public class Coordinates {
+    public static final Coordinates W = new Coordinates(-1, 0);
+    public static final Coordinates S = new Coordinates(1, 0);
+    public static final Coordinates A = new Coordinates(0, -1);
+    public static final Coordinates D = new Coordinates(0, 1);
     private int x;
     private int y;
 
@@ -28,3 +32,4 @@ public class Coordinates {
         return "x: " + this.x + " y: " + this.y;
     }
 }
+
