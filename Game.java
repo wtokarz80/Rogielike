@@ -53,6 +53,7 @@ class Game extends KeyAdapter {
                 break;   
         }
         System.out.println(player.getCoord().toString());
+        System.out.println("Player HP : " + player.stats.current_HP + "/" + player.stats.MaxHP);
         printBoard();
     }
 

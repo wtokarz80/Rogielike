@@ -1,10 +1,12 @@
 
 public class Player {
     Coordinates coord;
+    Statistics stats;
     String symbol = "\ud83d\udd7a";
 
     public Player() {
         this.coord = new Coordinates(5,5);
+        this.stats = new Statistics(1,0,100,10,10);
     }
 
     public void move(Coordinates direction) {
