@@ -5,8 +5,11 @@ import java.util.ArrayList;
 class Game extends KeyAdapter {
     
     private Player player;
-    private final int width = 20;
-    private final int height = 20;
+    // private final int width = 20;
+    // private final int height = 20;
+    private GameObject apple;
+    private final int width = 30;
+    private final int height = 30;
     private ArrayList<Obstacle> obstacles;
 
 
@@ -56,12 +59,17 @@ class Game extends KeyAdapter {
 
     
     private void createObstacles(){
-        Obstacle wall = new Obstacle("wall", " #", new Coordinates(0, 0), width, 1);
-        Obstacle wall2 = new Obstacle("wall", "#", new Coordinates(0, 0), 1, height);
+        Obstacle wall1 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(0, 0), width, 1);
+        Obstacle wall2 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(0, 0), 1, height);
+        Obstacle wall3 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(width-1, 0), width, 1);
+        Obstacle wall4 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(0, height-1), 1, height-1);
         Obstacle tree = new Tree ("tree", "\ud83c\udf32", new Coordinates(7, 8), 1, 1);
         Obstacle apple = new Apple("apple", "\ud83c\udf4e", new Coordinates(10, 10), 1, 1);
-        this.obstacles.add(wall);
+
+        this.obstacles.add(wall1);
         this.obstacles.add(wall2);
+        this.obstacles.add(wall3);
+        this.obstacles.add(wall4);
         this.obstacles.add(tree);
         this.obstacles.add(apple);
     }
@@ -78,7 +86,7 @@ class Game extends KeyAdapter {
                     System.out.print(board[i][j]);
                     continue;
                 }
-                System.out.print(" .");
+                System.out.print("  ");
             }
             System.out.println();
         }
