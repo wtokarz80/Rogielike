@@ -7,16 +7,22 @@ class Game extends KeyAdapter {
 
     private Player player;
     private ObstaclesList obstacles;
+
     private GameElementsList gameElements;
     
+    private GameObject key;
+    private GameObject door;
     private final int width = 30;
     private final int height = 30;
 
     public Game() {
         gameElements = new GameElementsList();
         obstacles = new ObstaclesList();
+
         player = new Player("Lolo");
-        
+
+        key = new Key("key","\ud83d\udddd\ufe0f ", new Coordinates(21, 20), 1, 1);
+        door = new Door("door", "\ud83d\udeaa", new Coordinates(10, 26), 1, 1);
 
         printBoard();
     }
@@ -49,7 +55,9 @@ class Game extends KeyAdapter {
                 }
                 break;
         }
+
         Common.displayStats(player);
+
         printBoard();
         Common.displayInventory(player);
         // System.out.println(player.getInventory().toString());
@@ -58,6 +66,7 @@ class Game extends KeyAdapter {
     private void printBoard() {
         String[][] board = new String[width][height];
         board[this.player.getCoord().getX()][this.player.getCoord().getY()] = player.getSymbol();
+        board[this.door.getPivot().getX()][this.door.getPivot().getY()] = door.getSymbol();
 
         for (GameObject gameObject : gameElements.getGameElamenstList()) {
             if (this.player.getCoord().getX() == gameObject.getPivot().getX()
@@ -102,10 +111,15 @@ class Game extends KeyAdapter {
                 return false;
             }
         }
+
         // if (isPlayerInRange(key, coord)) {
         //     key.use(player);
         //     return false;
         // }
+
+        if (isPlayerInRange(door, coord) && Player.getInventory().containsKey("key") == false){
+            return false;
+        }
         return true;
     }
 
@@ -128,20 +142,21 @@ class Game extends KeyAdapter {
             player.stats.lvl += 1;
             player.stats.maxHP += 2;
             player.stats.currentHP += 2;
-        }
+
+        }   
     }
 
-    public void Taking_dmg_and_death() {
+    public void Taking_dmg_and_death(){
         player.stats.currentHP -= 2;
-        if (player.stats.currentHP <= 0) {
+        if (player.stats.currentHP <= 0){
             Common.clearScreen();
             System.out.println("Game over");
         }
     }
 
-    public void Healing() {
+    public void Healing(){
         player.stats.currentHP += 1;
-        if (player.stats.currentHP >= player.stats.maxHP) {
+        if (player.stats.currentHP >= player.stats.maxHP){
             player.stats.currentHP = player.stats.maxHP;
         }
     }

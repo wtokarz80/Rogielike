@@ -1,4 +1,3 @@
-
 public class Statistics {
     int lvl;
     int exp;
@@ -10,6 +9,7 @@ public class Statistics {
     int def;
 
     public Statistics(int lvl, int exp, int expToLvl, int currentHP, int maxHP, int str, int attack, int def){
+
         this.lvl = lvl;
         this.exp = exp;
         this.expToLvl = expToLvl;
@@ -25,6 +25,7 @@ public class Statistics {
     }
 
     public int getExp(){
+
         return exp;
     }
 
@@ -66,6 +67,7 @@ public class Statistics {
 
     public void setDef(int def){
         this.def = def;
+
     }
 
 }
