@@ -54,6 +54,8 @@ class Game extends KeyAdapter {
         }
         System.out.println(player.getCoord().toString());
         System.out.println("Player HP : " + player.stats.current_HP + "/" + player.stats.MaxHP);
+        System.out.println("Experience : " + player.stats.exp + "/" + player.stats.expToLvl +
+        "     Level: " + player.stats.lvl);
         printBoard();
     }
 
@@ -120,5 +122,31 @@ class Game extends KeyAdapter {
             && y >= pivot.getY() && y < pivot.getY() + width;
 
 
+    }
+    public void Experience_get_and_lvl_Up() {   // Will change later
+        player.stats.exp += 3;
+        if (player.stats.exp >= player.stats.expToLvl){
+            int experience_left = player.stats.exp - player.stats.expToLvl;
+            player.stats.exp = 0 + experience_left;
+            player.stats.expToLvl += 10;
+            player.stats.lvl += 1;
+            player.stats.MaxHP += 2;
+            player.stats.current_HP += 2;
+        }   
+    }
+
+    public void Taking_dmg_and_death(){
+        player.stats.current_HP -= 2;
+        if (player.stats.current_HP <= 0){
+            Common.clearScreen();
+            System.out.println("Game over");
+        }
+    }
+
+    public void Healing(){
+        player.stats.current_HP += 1;
+        if (player.stats.current_HP >= player.stats.MaxHP){
+            player.stats.current_HP = player.stats.MaxHP;
+        }
     }
 }
