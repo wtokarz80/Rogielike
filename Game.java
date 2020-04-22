@@ -1,30 +1,26 @@
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.List;
+
 
 class Game extends KeyAdapter {
 
     private Player player;
+    private EnemyList enemys;
     private ObstaclesList obstacles;
-
     private GameElementsList gameElements;
-    
-    private GameObject key;
-    private GameObject door;
     private final int width = 30;
     private final int height = 30;
 
     public Game() {
+        enemys = new EnemyList();
         gameElements = new GameElementsList();
         obstacles = new ObstaclesList();
 
-        player = new Player("Lolo");
-
-        key = new Key("key","\ud83d\udddd\ufe0f ", new Coordinates(21, 20), 1, 1);
-        door = new Door("door", "\ud83d\udeaa", new Coordinates(10, 26), 1, 1);
-
+        player = new Player("Lolo", new Coordinates(5,5), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udd7a");
+        Common.displayStats(player);
         printBoard();
+        Common.displayInventory(player);
+
     }
 
     @Override
@@ -57,25 +53,16 @@ class Game extends KeyAdapter {
         }
 
         Common.displayStats(player);
-
         printBoard();
         Common.displayInventory(player);
-        // System.out.println(player.getInventory().toString());
     }
 
     private void printBoard() {
         String[][] board = new String[width][height];
         board[this.player.getCoord().getX()][this.player.getCoord().getY()] = player.getSymbol();
-        board[this.door.getPivot().getX()][this.door.getPivot().getY()] = door.getSymbol();
 
-        for (GameObject gameObject : gameElements.getGameElamenstList()) {
-            if (this.player.getCoord().getX() == gameObject.getPivot().getX()
-                    && this.player.getCoord().getY() == gameObject.getPivot().getY())
-                gameObject.use(player);
-            board[gameObject.getPivot().getX()][gameObject.getPivot().getY()] = gameObject.getSymbol();
-
-        }
-
+        printGameObjects(board);
+        printEnemys(board);
         printObstacles(board);
 
         for (int i = 0; i < width; i++) {
@@ -87,6 +74,24 @@ class Game extends KeyAdapter {
                 System.out.print("  ");
             }
             System.out.println();
+        }
+    }
+
+    private void printEnemys(String[][] board){
+        for (Enemy enemy : enemys.getEnemyList()) {
+            if (player.getCoord().getX() == enemy.getCoord().getX()
+                    && player.getCoord().getY() == enemy.getCoord().getY())
+                enemy.use(player);
+            board[enemy.getCoord().getX()][enemy.getCoord().getY()] = enemy.getSymbol();
+        }
+    }
+
+    private void printGameObjects(String[][] board){
+        for (GameObject gameObject : gameElements.getGameElamenstList()) {
+            if (this.player.getCoord().getX() == gameObject.getPivot().getX()
+                    && this.player.getCoord().getY() == gameObject.getPivot().getY())
+                gameObject.use(player);
+            board[gameObject.getPivot().getX()][gameObject.getPivot().getY()] = gameObject.getSymbol();
         }
     }
 
@@ -111,15 +116,6 @@ class Game extends KeyAdapter {
                 return false;
             }
         }
-
-        // if (isPlayerInRange(key, coord)) {
-        //     key.use(player);
-        //     return false;
-        // }
-
-        if (isPlayerInRange(door, coord) && Player.getInventory().containsKey("key") == false){
-            return false;
-        }
         return true;
     }
 
@@ -133,31 +129,31 @@ class Game extends KeyAdapter {
         return x >= pivot.getX() && x < pivot.getX() + height && y >= pivot.getY() && y < pivot.getY() + width;
     }
 
-    public void Experience_get_and_lvl_Up() { // Will change later
-        player.stats.exp += 3;
-        if (player.stats.exp >= player.stats.expToLvl) {
-            int experience_left = player.stats.exp - player.stats.expToLvl;
-            player.stats.exp = 0 + experience_left;
-            player.stats.expToLvl += 10;
-            player.stats.lvl += 1;
-            player.stats.maxHP += 2;
-            player.stats.currentHP += 2;
+    // public void Experience_get_and_lvl_Up() { // Will change later
+    //     player.stats.exp += 3;
+    //     if (player.stats.exp >= player.stats.expToLvl) {
+    //         int experience_left = player.stats.exp - player.stats.expToLvl;
+    //         player.stats.exp = 0 + experience_left;
+    //         player.stats.expToLvl += 10;
+    //         player.stats.lvl += 1;
+    //         player.stats.maxHP += 2;
+    //         player.stats.currentHP += 2;
 
-        }   
-    }
+    //     }   
+    // }
 
-    public void Taking_dmg_and_death(){
-        player.stats.currentHP -= 2;
-        if (player.stats.currentHP <= 0){
-            Common.clearScreen();
-            System.out.println("Game over");
-        }
-    }
+    // public void Taking_dmg_and_death(){
+    //     player.stats.currentHP -= 2;
+    //     if (player.stats.currentHP <= 0){
+    //         Common.clearScreen();
+    //         System.out.println("Game over");
+    //     }
+    // }
 
-    public void Healing(){
-        player.stats.currentHP += 1;
-        if (player.stats.currentHP >= player.stats.maxHP){
-            player.stats.currentHP = player.stats.maxHP;
-        }
-    }
+    // public void Healing(){
+    //     player.stats.currentHP += 1;
+    //     if (player.stats.currentHP >= player.stats.maxHP){
+    //         player.stats.currentHP = player.stats.maxHP;
+    //     }
+    // }
 }

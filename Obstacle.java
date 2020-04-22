@@ -8,7 +8,18 @@ public class Obstacle extends GameObject{
 
     @Override
     public void use(Player player) {
-        // TODO Auto-generated method stub
+        if (super.getName().equals("tree")){
+            player.setSymbol("\ud83c\udf2d");
+        }
+        else if (super.getName().equals("door")) {
+            if (player.getInventory().containsKey("key") == false){
+                System.out.println("You need a key.");
+            }
+            else{
+                super.setPivot(new Coordinates(0, 0));
+                super.setSymbol("\ud83e\uddf1");
+            }
+        }
 
     }
 

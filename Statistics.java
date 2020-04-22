@@ -29,6 +29,10 @@ public class Statistics {
         return exp;
     }
 
+    public void setExp(int exp){
+        this.exp = exp;
+    }
+
     public int getExpToLvl(){
         return expToLvl;
     }
