@@ -22,6 +22,8 @@ public class ObstaclesList {
         Obstacle wall8 = new Obstacle("wall", "\ud83e\uddf1 ", new Coordinates(6, 20), 1, 18);
         Obstacle wall9 = new Obstacle("wall", "\ud83e\uddf1 ", new Coordinates(24, 7), 14, 1);
         Obstacle wall10 = new Obstacle("wall", "\ud83e\uddf1 ", new Coordinates(11, 7), 1, 13);
+        Obstacle treeKey = new Tree("wall", "\ud83c\udf32", new Coordinates(21, 17), 1, 3);
+        Obstacle treeKey2 = new Tree("wall", "\ud83c\udf32", new Coordinates(21, 19), 1, 1);
         Obstacle tree = new Tree ("tree", "\ud83c\udf32", new Coordinates(8, 3), 1, 1);
         Obstacle tree1 = new Tree ("tree", "\ud83c\udf32", new Coordinates(2, 5), 2, 2);
         Obstacle tree2 = new Tree ("tree", "\ud83c\udf32", new Coordinates(25, 24), 4, 3);
@@ -38,6 +40,8 @@ public class ObstaclesList {
         this.obstacles.add(wall8);
         this.obstacles.add(wall9);
         this.obstacles.add(wall10);
+        this.obstacles.add(treeKey);
+        this.obstacles.add(treeKey2);      
         this.obstacles.add(tree);
         this.obstacles.add(tree1);
         this.obstacles.add(tree2);
