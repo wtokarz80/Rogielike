@@ -7,6 +7,7 @@ class Game extends KeyAdapter {
     private Player player;
     private ObstaclesList obstacles;
     private GameObject key;
+    private GameObject door;
     private Food apple1;
     private Food apple2;
     private final int width = 30;
@@ -18,6 +19,7 @@ class Game extends KeyAdapter {
         obstacles = new ObstaclesList();
         player = new Player();
         key = new Key("key","\ud83d\udddd\ufe0f ", new Coordinates(21, 20), 1, 1);
+        door = new Door("door", "\ud83d\udeaa", new Coordinates(10, 26), 1, 1);
         apple1 = new Food("apple", "\ud83c\udf4e", new Coordinates(11, 11), 1, 1);
         apple2 = new Food("apple", "\ud83c\udf4e", new Coordinates(16, 13), 1, 1);
         printBoard();
@@ -63,6 +65,7 @@ class Game extends KeyAdapter {
     private void printBoard() {
         String[][] board  = new String[width][height];
         board[this.player.getCoord().getX()][this.player.getCoord().getY()] = player.getSymbol();
+        board[this.door.getPivot().getX()][this.door.getPivot().getY()] = door.getSymbol();
 
         if(this.player.getCoord().getX() == this.key.getPivot().getX() && this.player.getCoord().getY() == this.key.getPivot().getY())
             this.key.use(player);
@@ -113,6 +116,9 @@ class Game extends KeyAdapter {
         }
         if (isPlayerInRange(key, coord)){
             key.use(player);
+            return false;
+        }
+        if (isPlayerInRange(door, coord) && Player.getInventory().containsKey("key") == false){
             return false;
         }
         return true;
