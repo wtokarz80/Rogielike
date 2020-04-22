@@ -21,7 +21,7 @@ public class Common {
 
     public static void displayInventory(Player player){
         System.out.println("Your inventory:");
-        for (String key : player.getInventory().keySet()){
+        for (String key : player.getInventory().keySet()) {
             System.out.print(key + ": " + player.getInventory().get(key) + " ");
         }
     }

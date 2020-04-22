@@ -1,12 +1,12 @@
 
 public class Baby extends Player {
 
-    private String symbol = "\ud83d\udc83";
-    private Coordinates coord = new Coordinates(5, 27);
+    private String symbol;
+    private Coordinates coord ;
     private boolean isTouchingHer = false;
 
-    public Baby(String name) {
-        super(name);
+    public Baby(String name, Coordinates coord, Statistics stats, String symbol) {
+        super(name, coord, stats, symbol);
         // TODO Auto-generated constructor stub
     }
 

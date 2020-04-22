@@ -1,13 +1,12 @@
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.List;
+
 
 class Game extends KeyAdapter {
 
     private Player player;
+    private EnemyList enemys;
     private ObstaclesList obstacles;
-
     private GameElementsList gameElements;
     private Baby baby;
     private GameObject door;
@@ -15,15 +14,19 @@ class Game extends KeyAdapter {
     private final int height = 30;
 
     public Game() {
+        enemys = new EnemyList();
         gameElements = new GameElementsList();
         obstacles = new ObstaclesList();
 
-        player = new Player("Lolo");
+        player = new Player("Lolo", new Coordinates(2,2), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udd7a");
+        Common.displayStats(player);
 
-        baby = new Baby("baby");
+        // baby = new Baby("baby", new Coordinates(5, 27), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udc83");
         door = new Door("door", "\ud83d\udeaa", new Coordinates(10, 26), 1, 1);
 
         printBoard();
+        Common.displayInventory(player);
+
     }
 
     @Override
@@ -36,41 +39,39 @@ class Game extends KeyAdapter {
             case 'w':
                 if (canPlayerMove(Coordinates.W)) {
                     player.move(Coordinates.W);
-                    baby.move(Coordinates.W, player, baby);
+                    // baby.move(Coordinates.W, player, baby);
                 }
                 break;
             case 's':
                 if (canPlayerMove(Coordinates.S)) {
                     player.move(Coordinates.S);
-                    baby.move(Coordinates.S, player, baby);
+                    // baby.move(Coordinates.S, player, baby);
                 }
                 break;
             case 'a':
                 if (canPlayerMove(Coordinates.A)) {
                     player.move(Coordinates.A);
-                     baby.move(Coordinates.A, player, baby);
+                    //  baby.move(Coordinates.A, player, baby);
                 }
                 break;
             case 'd':
                 if (canPlayerMove(Coordinates.D)) {
                     player.move(Coordinates.D);
-                    baby.move(Coordinates.D, player, baby);
+                    // baby.move(Coordinates.D, player, baby);
                 }
                 break;
         }
 
         Common.displayStats(player);
-
         printBoard();
         Common.displayInventory(player);
-       
     }
 
     private void printBoard() {
         String[][] board = new String[width][height];
         board[this.player.getCoord().getX()][this.player.getCoord().getY()] = player.getSymbol();
         board[this.door.getPivot().getX()][this.door.getPivot().getY()] = door.getSymbol();
-        board[this.baby.getCoord().getX()][this.baby.getCoord().getY()] = baby.getSymbol();
+        // board[this.baby.getCoord().getX()][this.baby.getCoord().getY()] = baby.getSymbol();
 
         for (GameObject gameObject : gameElements.getGameElamenstList()) {
             if (this.player.getCoord().getX() == gameObject.getPivot().getX()
@@ -80,6 +81,8 @@ class Game extends KeyAdapter {
 
         }
 
+        printGameObjects(board);
+        printEnemys(board);
         printObstacles(board);
 
         for (int i = 0; i < width; i++) {
@@ -91,6 +94,24 @@ class Game extends KeyAdapter {
                 System.out.print("  ");
             }
             System.out.println();
+        }
+    }
+
+    private void printEnemys(String[][] board){
+        for (Enemy enemy : enemys.getEnemyList()) {
+            if (player.getCoord().getX() == enemy.getCoord().getX()
+                    && player.getCoord().getY() == enemy.getCoord().getY())
+                enemy.use(player);
+            board[enemy.getCoord().getX()][enemy.getCoord().getY()] = enemy.getSymbol();
+        }
+    }
+
+    private void printGameObjects(String[][] board){
+        for (GameObject gameObject : gameElements.getGameElamenstList()) {
+            if (this.player.getCoord().getX() == gameObject.getPivot().getX()
+                    && this.player.getCoord().getY() == gameObject.getPivot().getY())
+                gameObject.use(player);
+            board[gameObject.getPivot().getX()][gameObject.getPivot().getY()] = gameObject.getSymbol();
         }
     }
 
@@ -121,9 +142,9 @@ class Game extends KeyAdapter {
         //     return false;
         // }
 
-        if (isPlayerInRange(door, coord) && Player.getInventory().containsKey("key") == false){
-            return false;
-        }
+        // if (isPlayerInRange(door, coord) && Player.getInventory().containsKey("key") == false){
+        //     return false;
+        // }
         return true;
     }
 
@@ -137,31 +158,31 @@ class Game extends KeyAdapter {
         return x >= pivot.getX() && x < pivot.getX() + height && y >= pivot.getY() && y < pivot.getY() + width;
     }
 
-    public void Experience_get_and_lvl_Up() { // Will change later
-        player.stats.exp += 3;
-        if (player.stats.exp >= player.stats.expToLvl) {
-            int experience_left = player.stats.exp - player.stats.expToLvl;
-            player.stats.exp = 0 + experience_left;
-            player.stats.expToLvl += 10;
-            player.stats.lvl += 1;
-            player.stats.maxHP += 2;
-            player.stats.currentHP += 2;
+    // public void Experience_get_and_lvl_Up() { // Will change later
+    //     player.stats.exp += 3;
+    //     if (player.stats.exp >= player.stats.expToLvl) {
+    //         int experience_left = player.stats.exp - player.stats.expToLvl;
+    //         player.stats.exp = 0 + experience_left;
+    //         player.stats.expToLvl += 10;
+    //         player.stats.lvl += 1;
+    //         player.stats.maxHP += 2;
+    //         player.stats.currentHP += 2;
 
-        }   
-    }
+    //     }   
+    // }
 
-    public void Taking_dmg_and_death(){
-        player.stats.currentHP -= 2;
-        if (player.stats.currentHP <= 0){
-            Common.clearScreen();
-            System.out.println("Game over");
-        }
-    }
+    // public void Taking_dmg_and_death(){
+    //     player.stats.currentHP -= 2;
+    //     if (player.stats.currentHP <= 0){
+    //         Common.clearScreen();
+    //         System.out.println("Game over");
+    //     }
+    // }
 
-    public void Healing(){
-        player.stats.currentHP += 1;
-        if (player.stats.currentHP >= player.stats.maxHP){
-            player.stats.currentHP = player.stats.maxHP;
-        }
-    }
+    // public void Healing(){
+    //     player.stats.currentHP += 1;
+    //     if (player.stats.currentHP >= player.stats.maxHP){
+    //         player.stats.currentHP = player.stats.maxHP;
+    //     }
+    // }
 }
