@@ -16,7 +16,7 @@ public class GameElementsList {
         Item arkenstone = new Item("arkenstone", "\ud83d\udc8e", new Coordinates(20, 9), 1, 1);
         Weapon sword = new Weapon("sword", " \u2694\ufe0f", new Coordinates(9, 9), 1, 1, 3, 0, 5);
         Weapon shield = new Weapon("shield", " \ud83d\udee1\ufe0f", new Coordinates(19, 15), 1, 1, 2, 5, 2);
-        GameObject door = new Door("door", "\ud83d\udeaa", new Coordinates(10, 26), 1, 1);
+        // GameObject door = new Door("door", "\ud83d\udeaa", new Coordinates(10, 26), 1, 1);
         
         gameElements.add(key);
         gameElements.add(apple1);
@@ -24,7 +24,7 @@ public class GameElementsList {
         gameElements.add(arkenstone);
         gameElements.add(sword);
         gameElements.add(shield);
-        gameElements.add(door);
+        // gameElements.add(door);
 
     }
 
