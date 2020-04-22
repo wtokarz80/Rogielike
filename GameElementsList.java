@@ -10,7 +10,7 @@ public class GameElementsList {
 
     private void createGameElementsList(){
 
-        Item key = new Item("key", "\ud83d\udddd\ufe0f ", new Coordinates(21, 17), 1, 1);
+        Item key = new Item("key", "\ud83d\udddd\ufe0f ", new Coordinates(23, 19), 1, 1);
         Food apple1 = new Food("apple", "\ud83c\udf4e", new Coordinates(11, 11), 1, 1, 2);
         Food apple2 = new Food("apple", "\ud83c\udf4e", new Coordinates(16, 13), 1, 1, 2);
         Item arkenstone = new Item("arkenstone", "\ud83d\udc8e", new Coordinates(20, 9), 1, 1);

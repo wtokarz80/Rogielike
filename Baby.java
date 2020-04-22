@@ -3,6 +3,7 @@ public class Baby extends Player {
 
     private String symbol = "\ud83d\udc83";
     private Coordinates coord = new Coordinates(5, 27);
+    private boolean isTouchingHer = false;
 
     public Baby(String name) {
         super(name);
@@ -11,8 +12,8 @@ public class Baby extends Player {
 
 
     public void move(Coordinates direction, Player player, Baby baby) {
-        if (player.getCoord().getX()==baby.getCoord().getX() && player.getCoord().getY()==baby.getCoord().getY() ){
-        System.out.println(direction.toString());
+        TouchHer(player, baby);
+        if (isTouchingHer){
         int x = this.coord.getX() + direction.getX();
         int y = this.coord.getY() + direction.getY();
         this.coord = new Coordinates(x, y);}
@@ -28,4 +29,11 @@ public class Baby extends Player {
     public Coordinates getCoord(){
         return coord;
     }
+
+    private void TouchHer(Player player, Baby baby){
+        if (player.getCoord().getX()==baby.getCoord().getX() && player.getCoord().getY()==baby.getCoord().getY()){
+            this.isTouchingHer = true;
+    }
+
+}
 }

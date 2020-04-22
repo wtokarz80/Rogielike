@@ -48,7 +48,7 @@ class Game extends KeyAdapter {
             case 'a':
                 if (canPlayerMove(Coordinates.A)) {
                     player.move(Coordinates.A);
-                    baby.move(Coordinates.A, player, baby);
+                     baby.move(Coordinates.A, player, baby);
                 }
                 break;
             case 'd':
@@ -116,7 +116,7 @@ class Game extends KeyAdapter {
             }
         }
 
-        // if (isPlayerInRange(key, coord)) {
+        // if (isPlayerInRange(baby, coord)) {
         //     key.use(player);
         //     return false;
         // }
