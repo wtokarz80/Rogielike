@@ -3,34 +3,69 @@ public class Statistics {
     int lvl;
     int exp;
     int expToLvl;
-    int current_HP;
-    int MaxHP;
-    public Statistics(int lvl, int exp, int expToLvl, int current_HP, int MaxHP){
+    int currentHP;
+    int maxHP;
+    int str;
+    int attack;
+    int def;
+
+    public Statistics(int lvl, int exp, int expToLvl, int currentHP, int maxHP, int str, int attack, int def){
         this.lvl = lvl;
         this.exp = exp;
         this.expToLvl = expToLvl;
-        this.current_HP = current_HP;
-        this.MaxHP = MaxHP;
+        this.currentHP = currentHP;
+        this.maxHP = maxHP;
+        this.str = str;
+        this.attack = attack;
+        this.def = def;
     }
 
-    public int get_player_lvl(){
+    public int getLvl(){ 
         return lvl;
     }
 
-    public int get_player_Experience(){
+    public int getExp(){
         return exp;
     }
 
-    public int get_player_ExpToLvl(){
+    public int getExpToLvl(){
         return expToLvl;
     }
 
-	public int get_Max_HP(){
-        return MaxHP;
+	public int getMaxHP(){
+        return maxHP;
     }
 
-    public int get_player_Current_HP(){
-        return current_HP;
+    public int getCurrentHP(){
+        return currentHP;
+    }
+
+    public void setCurrentHP(int currentHP){
+        this.currentHP = currentHP;
+    }
+
+    public int getStr(){ 
+        return str;
+    }
+
+    public void setStr(int str){
+        this.str = str;
+    }
+
+    public int getAttack(){ 
+        return attack;
+    }
+
+    public void setAttack(int attack){
+        this.attack = attack;
+    }
+
+    public int getDef(){ 
+        return def;
+    }
+
+    public void setDef(int def){
+        this.def = def;
     }
 
 }

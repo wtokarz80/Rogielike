@@ -4,14 +4,16 @@ import java.util.List;
 import java.util.Map;
 
 public class Player {
+    String name;
     Coordinates coord;
     Statistics stats;
     String symbol = "\ud83d\udd7a";
     Map<String, Integer> inventory;
 
-    public Player() {
+    public Player(String name) {
+        this.name = name;
         this.coord = new Coordinates(5,5);
-        this.stats = new Statistics(1,0,10,10,10);
+        this.stats = new Statistics(1,0,10,10,10, 5, 5, 5);
         this.inventory = new HashMap<>();
     }
 
@@ -47,4 +49,13 @@ public class Player {
     public Map<String, Integer> getInventory(){
         return inventory;
     }
+
+    public Statistics getStats(){
+        return stats;
+    }
+
+    public String getName(){
+        return name;
+    }
+
 }
