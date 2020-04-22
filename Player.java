@@ -11,7 +11,7 @@ public class Player {
 
     public Player() {
         this.coord = new Coordinates(5,5);
-        this.stats = new Statistics(1,0,10,10,10);
+        this.stats = new Statistics(1,0,10,10,10,1,1,1);
         this.inventory = new HashMap<>();
     }
 

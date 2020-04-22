@@ -1,36 +1,41 @@
-
 public class Statistics {
     int lvl;
     int exp;
     int expToLvl;
-    int current_HP;
-    int MaxHP;
-    public Statistics(int lvl, int exp, int expToLvl, int current_HP, int MaxHP){
+    int currentHP;
+    int maxHP;
+    int defence;
+    int strength;
+    int attack;
+    public Statistics(int lvl, int exp, int expToLvl, int currentHP, int maxHP, int defence, int strength, int attack){
         this.lvl = lvl;
         this.exp = exp;
         this.expToLvl = expToLvl;
-        this.current_HP = current_HP;
-        this.MaxHP = MaxHP;
+        this.currentHP = currentHP;
+        this.maxHP = maxHP;
+        this.defence = defence;
+        this.strength = strength;
+        this.attack = attack;
     }
 
-    public int get_player_lvl(){
+    public int getLvl(){
         return lvl;
     }
 
-    public int get_player_Experience(){
+    public int getExperience(){
         return exp;
     }
 
-    public int get_player_ExpToLvl(){
+    public int getExpToLvl(){
         return expToLvl;
     }
 
-	public int get_Max_HP(){
-        return MaxHP;
+	public int getMaxHP(){
+        return maxHP;
     }
 
-    public int get_player_Current_HP(){
-        return current_HP;
+    public int getCurrentHP(){
+        return currentHP;
     }
 
 }
