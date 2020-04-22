@@ -21,7 +21,7 @@ class Game extends KeyAdapter {
         player = new Player("Lolo", new Coordinates(2,2), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udd7a");
         Common.displayStats(player);
 
-        // baby = new Baby("baby", new Coordinates(5, 27), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udc83");
+        baby = new Baby("baby", new Coordinates(5, 27), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udc83");
         // door = new Door("door", "\ud83d\udeaa", new Coordinates(10, 26), 1, 1);
 
         printBoard();
@@ -39,25 +39,25 @@ class Game extends KeyAdapter {
             case 'w':
                 if (canPlayerMove(Coordinates.W)) {
                     player.move(Coordinates.W);
-                    // baby.move(Coordinates.W, player, baby);
+                    baby.move(Coordinates.W, player, baby);
                 }
                 break;
             case 's':
                 if (canPlayerMove(Coordinates.S)) {
                     player.move(Coordinates.S);
-                    // baby.move(Coordinates.S, player, baby);
+                    baby.move(Coordinates.S, player, baby);
                 }
                 break;
             case 'a':
                 if (canPlayerMove(Coordinates.A)) {
                     player.move(Coordinates.A);
-                    //  baby.move(Coordinates.A, player, baby);
+                    baby.move(Coordinates.A, player, baby);
                 }
                 break;
             case 'd':
                 if (canPlayerMove(Coordinates.D)) {
                     player.move(Coordinates.D);
-                    // baby.move(Coordinates.D, player, baby);
+                    baby.move(Coordinates.D, player, baby);
                 }
                 break;
         }
@@ -71,7 +71,7 @@ class Game extends KeyAdapter {
         String[][] board = new String[width][height];
         board[this.player.getCoord().getX()][this.player.getCoord().getY()] = player.getSymbol();
         // board[this.door.getPivot().getX()][this.door.getPivot().getY()] = door.getSymbol();
-        // board[this.baby.getCoord().getX()][this.baby.getCoord().getY()] = baby.getSymbol();
+        board[this.baby.getCoord().getX()][this.baby.getCoord().getY()] = baby.getSymbol();
 
         printGameObjects(board);
         printEnemys(board);

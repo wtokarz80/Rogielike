@@ -1,12 +1,18 @@
 
 public class Baby extends Player {
 
-    private String symbol;
-    private Coordinates coord ;
-    private boolean isTouchingHer = false;
+     private String symbol;
+     private Coordinates coord ;
+   //  private Statistics stats;
+   // private String name;
+     private boolean isTouchingHer = false;
 
     public Baby(String name, Coordinates coord, Statistics stats, String symbol) {
         super(name, coord, stats, symbol);
+     //   this.name = name;
+        this.coord = coord;
+   //     this.stats = stats;
+        this.symbol = symbol;
         // TODO Auto-generated constructor stub
     }
 
