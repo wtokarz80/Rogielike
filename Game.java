@@ -9,8 +9,7 @@ class Game extends KeyAdapter {
     private ObstaclesList obstacles;
 
     private GameElementsList gameElements;
-    
-    private GameObject key;
+    private Baby baby;
     private GameObject door;
     private final int width = 30;
     private final int height = 30;
@@ -21,7 +20,7 @@ class Game extends KeyAdapter {
 
         player = new Player("Lolo");
 
-        key = new Key("key","\ud83d\udddd\ufe0f ", new Coordinates(21, 20), 1, 1);
+        baby = new Baby("baby");
         door = new Door("door", "\ud83d\udeaa", new Coordinates(10, 26), 1, 1);
 
         printBoard();
@@ -37,21 +36,25 @@ class Game extends KeyAdapter {
             case 'w':
                 if (canPlayerMove(Coordinates.W)) {
                     player.move(Coordinates.W);
+                    baby.move(Coordinates.W, player, baby);
                 }
                 break;
             case 's':
                 if (canPlayerMove(Coordinates.S)) {
                     player.move(Coordinates.S);
+                    baby.move(Coordinates.S, player, baby);
                 }
                 break;
             case 'a':
                 if (canPlayerMove(Coordinates.A)) {
                     player.move(Coordinates.A);
+                    baby.move(Coordinates.A, player, baby);
                 }
                 break;
             case 'd':
                 if (canPlayerMove(Coordinates.D)) {
                     player.move(Coordinates.D);
+                    baby.move(Coordinates.D, player, baby);
                 }
                 break;
         }
@@ -60,13 +63,14 @@ class Game extends KeyAdapter {
 
         printBoard();
         Common.displayInventory(player);
-        // System.out.println(player.getInventory().toString());
+       
     }
 
     private void printBoard() {
         String[][] board = new String[width][height];
         board[this.player.getCoord().getX()][this.player.getCoord().getY()] = player.getSymbol();
         board[this.door.getPivot().getX()][this.door.getPivot().getY()] = door.getSymbol();
+        board[this.baby.getCoord().getX()][this.baby.getCoord().getY()] = baby.getSymbol();
 
         for (GameObject gameObject : gameElements.getGameElamenstList()) {
             if (this.player.getCoord().getX() == gameObject.getPivot().getX()
