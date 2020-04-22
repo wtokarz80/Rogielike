@@ -1,29 +1,60 @@
 
 public abstract class GameObject {
 
-    protected Coordinates coord;
     protected String name;
-    protected String symbol;
+    private String symbol;
+    private Coordinates pivot;
+    private int width;
+    private int height;
 
-    public GameObject(String name, String symbol, Coordinates coord){
-        this.name = name;
+    public GameObject(String name, String symbol, Coordinates pivot, int width, int height){
         this.symbol = symbol;
-        this.coord = coord;
+        this.name = name;
+        this.pivot = pivot;
+        this.width = width;
+        this.height = height;
     }
 
 
+    public String getSymbol() {
+        return symbol;
+    }
 
-    public abstract String getSymbol();
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
 
-    public abstract void setSymbol(String symbol);
+    public String getName() {
+        return name;
+    }
 
-    public abstract String getName();
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public abstract void setCoord (Coordinates coord);
+    public Coordinates getPivot() {
+        return pivot;
+    }
 
-    public abstract void setName(String name);
+    public void setPivot (Coordinates pivot) {
+        this.pivot = pivot;
+    }
 
-    public abstract Coordinates getCoord();
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
 
     public abstract void use(Player player);
 

@@ -5,50 +5,48 @@ import java.util.ArrayList;
 class Game extends KeyAdapter {
     
     private Player player;
-    private GameObject apple;
-    private final int width = 20;
-    private final int height = 20;
+    // private final int width = 20;
+    // private final int height = 20;
+    private GameObject key;
+    private final int width = 30;
+    private final int height = 30;
     private ArrayList<Obstacle> obstacles;
+
 
 
     public Game() {
         player = new Player();
+        key = new Key("key","\ud83d\udddd\ufe0f ", new Coordinates(21, 20), 1, 1);
         obstacles = new ArrayList<>();
         createObstacles();
+        printBoard();
     }
 
     @Override
     public void keyPressed(KeyEvent event) {
         Common.clearScreen();
-
         char ch = event.getKeyChar();
-
         System.out.println((int)ch);
-        Coordinates W = new Coordinates(-1, 0);
-        Coordinates S = new Coordinates(1, 0);
-        Coordinates A = new Coordinates(0, -1);
-        Coordinates D = new Coordinates(0, 1);
-
 
         switch(ch) {
             case 'w':
-                if (canPlayerMove(W)){
-                    player.move(W);
+                if (canPlayerMove(Coordinates.W)){
+                    player.move(Coordinates.W);
                 }
                 break;
             case 's':
-                if (canPlayerMove(S)){
-                    player.move(S);
+                if (canPlayerMove(Coordinates.S)){
+                    player.move(Coordinates.S);
                 }
                 break;
             case 'a':
-                if (canPlayerMove(A)){
-                    player.move(A);
+                if (canPlayerMove(Coordinates.A)){
+                    player.move(Coordinates.A);
                 }
                 break;
             case 'd':
-                if (canPlayerMove(D)){
-                    player.move(D);
+                if (canPlayerMove(Coordinates.D)){
+                    player.move(Coordinates.D);
             }
                 break;   
         }
@@ -57,22 +55,38 @@ class Game extends KeyAdapter {
         System.out.println("Experience : " + player.stats.exp + "/" + player.stats.expToLvl +
         "     Level: " + player.stats.lvl);
         printBoard();
+        System.out.println(player.getInventory().toString());
+    }
+
+    public ArrayList<Obstacle> getObstacles(){
+        return obstacles;
     }
 
     
     private void createObstacles(){
-        Obstacle wall = new Obstacle(new Coordinates(0,0), width, 1, " #");
-        Obstacle wall2 = new Obstacle(new Coordinates(0,0), 1, height, "#");
-        Tree tree = new Tree(new Coordinates(7, 6), 1, 1, "\ud83c\udf32", "Tree");
-        this.obstacles.add(wall);
+        Obstacle wall1 = new Obstacle("wall", " \ud83e\uddf1", new Coordinates(0, 0), width, 1);
+        Obstacle wall2 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(0, 0), 1, height);
+        Obstacle wall3 = new Obstacle("wall", "\ud83e\uddf1 ", new Coordinates(width-1, 0), width, 1);
+        Obstacle wall4 = new Obstacle("wall", " \ud83e\uddf1", new Coordinates(0, height-1), 1, height-1);
+        Obstacle tree = new Tree ("tree", "\ud83c\udf32", new Coordinates(7, 8), 1, 1);
+        Obstacle apple = new Apple("apple", "\ud83c\udf4e", new Coordinates(10, 10), 1, 1);
+
+        this.obstacles.add(wall1);
         this.obstacles.add(wall2);
+        this.obstacles.add(wall3);
+        this.obstacles.add(wall4);
         this.obstacles.add(tree);
+        this.obstacles.add(apple);
     }
 
     private void printBoard() {
         String[][] board  = new String[width][height];
         board[this.player.getCoord().getX()][this.player.getCoord().getY()] = player.getSymbol();
 
+        if(this.player.getCoord().getX() == this.key.getPivot().getX() && this.player.getCoord().getY() == this.key.getPivot().getY())
+            this.key.use(player);
+
+        board[this.key.getPivot().getX()][this.key.getPivot().getY()] = key.getSymbol();
         printObstacles(board);
 
         for(int i = 0; i< width;  i++) {
@@ -81,7 +95,7 @@ class Game extends KeyAdapter {
                     System.out.print(board[i][j]);
                     continue;
                 }
-                System.out.print(" .");
+                System.out.print("  ");
             }
             System.out.println();
         }
@@ -108,10 +122,14 @@ class Game extends KeyAdapter {
                 return false;
             }
         }
+        if (isPlayerInRange(key, coord)){
+            key.use(player);
+            return false;
+        }
         return true;
     }
 
-    private boolean isPlayerInRange(Obstacle obstacle, Coordinates coord){
+    private boolean isPlayerInRange(GameObject obstacle, Coordinates coord){
         int width = obstacle.getWidth();
         int height = obstacle.getHeight();
         Coordinates pivot = obstacle.getPivot();
@@ -120,8 +138,6 @@ class Game extends KeyAdapter {
 
         return x >= pivot.getX() && x < pivot.getX() + height
             && y >= pivot.getY() && y < pivot.getY() + width;
-
-
     }
     public void Experience_get_and_lvl_Up() {   // Will change later
         player.stats.exp += 3;
