@@ -5,20 +5,21 @@ import java.util.ArrayList;
 class Game extends KeyAdapter {
     
     private Player player;
-    // private final int width = 20;
-    // private final int height = 20;
+    private ObstaclesList obstacles;
     private GameObject key;
+    private Food apple1;
+    private Food apple2;
     private final int width = 30;
     private final int height = 30;
-    private ArrayList<Obstacle> obstacles;
 
 
 
     public Game() {
+        obstacles = new ObstaclesList();
         player = new Player();
         key = new Key("key","\ud83d\udddd\ufe0f ", new Coordinates(21, 20), 1, 1);
-        obstacles = new ArrayList<>();
-        createObstacles();
+        apple1 = new Food("apple", "\ud83c\udf4e", new Coordinates(11, 11), 1, 1);
+        apple2 = new Food("apple", "\ud83c\udf4e", new Coordinates(16, 13), 1, 1);
         printBoard();
     }
 
@@ -58,26 +59,6 @@ class Game extends KeyAdapter {
         System.out.println(player.getInventory().toString());
     }
 
-    public ArrayList<Obstacle> getObstacles(){
-        return obstacles;
-    }
-
-    
-    private void createObstacles(){
-        Obstacle wall1 = new Obstacle("wall", " \ud83e\uddf1", new Coordinates(0, 0), width, 1);
-        Obstacle wall2 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(0, 0), 1, height);
-        Obstacle wall3 = new Obstacle("wall", "\ud83e\uddf1 ", new Coordinates(width-1, 0), width, 1);
-        Obstacle wall4 = new Obstacle("wall", " \ud83e\uddf1", new Coordinates(0, height-1), 1, height-1);
-        Obstacle tree = new Tree ("tree", "\ud83c\udf32", new Coordinates(7, 8), 1, 1);
-        Obstacle apple = new Apple("apple", "\ud83c\udf4e", new Coordinates(10, 10), 1, 1);
-
-        this.obstacles.add(wall1);
-        this.obstacles.add(wall2);
-        this.obstacles.add(wall3);
-        this.obstacles.add(wall4);
-        this.obstacles.add(tree);
-        this.obstacles.add(apple);
-    }
 
     private void printBoard() {
         String[][] board  = new String[width][height];
@@ -85,8 +66,16 @@ class Game extends KeyAdapter {
 
         if(this.player.getCoord().getX() == this.key.getPivot().getX() && this.player.getCoord().getY() == this.key.getPivot().getY())
             this.key.use(player);
+        if(this.player.getCoord().getX() == this.apple1.getPivot().getX() && this.player.getCoord().getY() == this.apple1.getPivot().getY())
+            this.apple1.use(player);
+        if(this.player.getCoord().getX() == this.apple2.getPivot().getX() && this.player.getCoord().getY() == this.apple2.getPivot().getY())
+            this.apple2.use(player);
 
         board[this.key.getPivot().getX()][this.key.getPivot().getY()] = key.getSymbol();
+        board[this.apple1.getPivot().getX()][this.apple1.getPivot().getY()] = apple1.getSymbol();
+        board[this.apple2.getPivot().getX()][this.apple2.getPivot().getY()] = apple2.getSymbol();
+
+
         printObstacles(board);
 
         for(int i = 0; i< width;  i++) {
@@ -102,7 +91,7 @@ class Game extends KeyAdapter {
     }
 
     private void printObstacles(String[][] board){
-        for (Obstacle obstacle : obstacles){
+        for (Obstacle obstacle : obstacles.getObstacles()){
             int width = obstacle.getWidth();
             int height = obstacle.getHeight();
             Coordinates pivot = obstacle.getPivot();
@@ -116,7 +105,7 @@ class Game extends KeyAdapter {
     }
 
     public boolean canPlayerMove(Coordinates coord){
-        for (Obstacle obstacle : obstacles){
+        for (Obstacle obstacle : obstacles.getObstacles()){
             if (isPlayerInRange(obstacle, coord)){
                 obstacle.use(player);
                 return false;

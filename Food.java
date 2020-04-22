@@ -1,18 +1,16 @@
-
-public class Key extends GameObject{
-    private String symbol; 
+public class Food extends GameObject{
+    private String symbol;
     private Coordinates pivot;
     private int width;
     private int height;
 
-    public Key(String name, String symbol, Coordinates pivot, int width, int height) {
+    public Food(String name, String symbol, Coordinates pivot, int width, int height) {
         super(name, symbol, pivot, width, height);
         this.name = name;
         this.symbol = symbol;
         this.pivot = pivot;
         this.width = width;
         this.height = height;
-
     }
 
     public String getSymbol(){
@@ -58,11 +56,7 @@ public class Key extends GameObject{
     public void use(Player player){
         setPivot(new Coordinates(0, 0));
         setSymbol("\ud83e\uddf1 ");
-        player.addItem("key");
+        player.addItem("apple");
     }
         
     }
-
-    
-
-
