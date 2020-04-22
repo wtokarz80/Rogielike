@@ -12,7 +12,7 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
-        this.coord = new Coordinates(5,5);
+        this.coord = new Coordinates(2,2);
         this.stats = new Statistics(1,0,10,10,10, 5, 5, 5);
         this.inventory = new HashMap<>();
 
