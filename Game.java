@@ -7,7 +7,7 @@ class Game extends KeyAdapter {
     private Player player;
     // private final int width = 20;
     // private final int height = 20;
-    private GameObject apple;
+    private GameObject key;
     private final int width = 30;
     private final int height = 30;
     private ArrayList<Obstacle> obstacles;
@@ -16,8 +16,10 @@ class Game extends KeyAdapter {
 
     public Game() {
         player = new Player();
+        key = new Key("key","\ud83d\udddd\ufe0f ", new Coordinates(21, 20), 1, 1);
         obstacles = new ArrayList<>();
         createObstacles();
+        printBoard();
     }
 
     @Override
@@ -59,10 +61,10 @@ class Game extends KeyAdapter {
 
     
     private void createObstacles(){
-        Obstacle wall1 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(0, 0), width, 1);
+        Obstacle wall1 = new Obstacle("wall", " \ud83e\uddf1", new Coordinates(0, 0), width, 1);
         Obstacle wall2 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(0, 0), 1, height);
-        Obstacle wall3 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(width-1, 0), width, 1);
-        Obstacle wall4 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(0, height-1), 1, height-1);
+        Obstacle wall3 = new Obstacle("wall", "\ud83e\uddf1 ", new Coordinates(width-1, 0), width, 1);
+        Obstacle wall4 = new Obstacle("wall", " \ud83e\uddf1", new Coordinates(0, height-1), 1, height-1);
         Obstacle tree = new Tree ("tree", "\ud83c\udf32", new Coordinates(7, 8), 1, 1);
         Obstacle apple = new Apple("apple", "\ud83c\udf4e", new Coordinates(10, 10), 1, 1);
 
@@ -78,6 +80,10 @@ class Game extends KeyAdapter {
         String[][] board  = new String[width][height];
         board[this.player.getCoord().getX()][this.player.getCoord().getY()] = player.getSymbol();
 
+        if(this.player.getCoord().getX() == this.key.getPivot().getX() && this.player.getCoord().getY() == this.key.getPivot().getY())
+            this.key.use(player);
+
+        board[this.key.getPivot().getX()][this.key.getPivot().getY()] = key.getSymbol();
         printObstacles(board);
 
         for(int i = 0; i< width;  i++) {
@@ -113,10 +119,14 @@ class Game extends KeyAdapter {
                 return false;
             }
         }
+        if (isPlayerInRange(key, coord)){
+            key.use(player);
+            return false;
+        }
         return true;
     }
 
-    private boolean isPlayerInRange(Obstacle obstacle, Coordinates coord){
+    private boolean isPlayerInRange(GameObject obstacle, Coordinates coord){
         int width = obstacle.getWidth();
         int height = obstacle.getHeight();
         Coordinates pivot = obstacle.getPivot();
