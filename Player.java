@@ -10,15 +10,9 @@ public class Player {
     static Map<String, Integer> inventory;
 
     public Player() {
-<<<<<<< HEAD
         this.coord = new Coordinates(5,5);
         this.stats = new Statistics(1,0,10,10,10,1,1,1);
-        this.inventory = new HashMap<>();
-=======
-        this.coord = new Coordinates(5, 5);
-        this.stats = new Statistics(1, 0, 10, 10, 10);
         Player.inventory = new HashMap<>();
->>>>>>> 065262b2398bb29a9894e3cba9932661b400e31e
     }
 
     public void move(Coordinates direction) {
