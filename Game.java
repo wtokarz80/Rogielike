@@ -8,6 +8,8 @@ class Game extends KeyAdapter {
     private EnemyList enemys;
     private ObstaclesList obstacles;
     private GameElementsList gameElements;
+    private Baby baby;
+    private GameObject door;
     private final int width = 30;
     private final int height = 30;
 
@@ -16,8 +18,12 @@ class Game extends KeyAdapter {
         gameElements = new GameElementsList();
         obstacles = new ObstaclesList();
 
-        player = new Player("Lolo", new Coordinates(5,5), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udd7a");
+        player = new Player("Lolo", new Coordinates(2,2), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udd7a");
         Common.displayStats(player);
+
+        // baby = new Baby("baby", new Coordinates(5, 27), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udc83");
+        door = new Door("door", "\ud83d\udeaa", new Coordinates(10, 26), 1, 1);
+
         printBoard();
         Common.displayInventory(player);
 
@@ -33,21 +39,25 @@ class Game extends KeyAdapter {
             case 'w':
                 if (canPlayerMove(Coordinates.W)) {
                     player.move(Coordinates.W);
+                    // baby.move(Coordinates.W, player, baby);
                 }
                 break;
             case 's':
                 if (canPlayerMove(Coordinates.S)) {
                     player.move(Coordinates.S);
+                    // baby.move(Coordinates.S, player, baby);
                 }
                 break;
             case 'a':
                 if (canPlayerMove(Coordinates.A)) {
                     player.move(Coordinates.A);
+                    //  baby.move(Coordinates.A, player, baby);
                 }
                 break;
             case 'd':
                 if (canPlayerMove(Coordinates.D)) {
                     player.move(Coordinates.D);
+                    // baby.move(Coordinates.D, player, baby);
                 }
                 break;
         }
@@ -60,6 +70,16 @@ class Game extends KeyAdapter {
     private void printBoard() {
         String[][] board = new String[width][height];
         board[this.player.getCoord().getX()][this.player.getCoord().getY()] = player.getSymbol();
+        board[this.door.getPivot().getX()][this.door.getPivot().getY()] = door.getSymbol();
+        // board[this.baby.getCoord().getX()][this.baby.getCoord().getY()] = baby.getSymbol();
+
+        for (GameObject gameObject : gameElements.getGameElamenstList()) {
+            if (this.player.getCoord().getX() == gameObject.getPivot().getX()
+                    && this.player.getCoord().getY() == gameObject.getPivot().getY())
+                gameObject.use(player);
+            board[gameObject.getPivot().getX()][gameObject.getPivot().getY()] = gameObject.getSymbol();
+
+        }
 
         printGameObjects(board);
         printEnemys(board);
@@ -116,6 +136,15 @@ class Game extends KeyAdapter {
                 return false;
             }
         }
+
+        // if (isPlayerInRange(baby, coord)) {
+        //     key.use(player);
+        //     return false;
+        // }
+
+        // if (isPlayerInRange(door, coord) && Player.getInventory().containsKey("key") == false){
+        //     return false;
+        // }
         return true;
     }
 
