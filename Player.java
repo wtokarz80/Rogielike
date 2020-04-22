@@ -6,11 +6,11 @@ import java.util.Map;
 public class Player {
     Coordinates coord;
     String symbol = "\ud83d\udd7a";
-    Map<String, Integer> inventory;
+    static Map<String, Integer> inventory;
 
     public Player() {
-        this.coord = new Coordinates(5,5);
-        this.inventory = new HashMap<>();
+        this.coord = new Coordinates(5, 5);
+        Player.inventory = new HashMap<>();
     }
 
     public void move(Coordinates direction) {
@@ -32,17 +32,16 @@ public class Player {
         this.symbol = symbol;
     }
 
-    public void addItem(String item){
+    public void addItem(String item) {
         Integer count = inventory.get(item);
         if (count == null) {
             inventory.put(item, 1);
-        }
-        else {
+        } else {
             inventory.put(item, count + 1);
-        }   
+        }
     }
 
-    public Map<String, Integer> getInventory(){
+    public static Map<String, Integer> getInventory() {
         return inventory;
     }
 }
