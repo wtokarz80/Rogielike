@@ -7,12 +7,18 @@ public class Player {
     Coordinates coord;
     Statistics stats;
     String symbol = "\ud83d\udd7a";
-    Map<String, Integer> inventory;
+    static Map<String, Integer> inventory;
 
     public Player() {
+<<<<<<< HEAD
         this.coord = new Coordinates(5,5);
         this.stats = new Statistics(1,0,10,10,10,1,1,1);
         this.inventory = new HashMap<>();
+=======
+        this.coord = new Coordinates(5, 5);
+        this.stats = new Statistics(1, 0, 10, 10, 10);
+        Player.inventory = new HashMap<>();
+>>>>>>> 065262b2398bb29a9894e3cba9932661b400e31e
     }
 
     public void move(Coordinates direction) {
@@ -34,17 +40,16 @@ public class Player {
         this.symbol = symbol;
     }
 
-    public void addItem(String item){
+    public void addItem(String item) {
         Integer count = inventory.get(item);
         if (count == null) {
             inventory.put(item, 1);
-        }
-        else {
+        } else {
             inventory.put(item, count + 1);
-        }   
+        }
     }
 
-    public Map<String, Integer> getInventory(){
+    public static Map<String, Integer> getInventory() {
         return inventory;
     }
 }

@@ -1,6 +1,6 @@
 
 public class Key extends GameObject{
-    private String symbol;
+    private String symbol; 
     private Coordinates pivot;
     private int width;
     private int height;
