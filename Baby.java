@@ -1,24 +1,21 @@
 
 public class Baby extends Player {
 
-     private String symbol;
-     private Coordinates coord ;
-   //  private Statistics stats;
-   // private String name;
-     private boolean isTouchingHer = false;
+    private String symbol;
+    private Coordinates coord ;
+    private boolean isInHouse = false;
+    private boolean isTouchingHer = false;
 
     public Baby(String name, Coordinates coord, Statistics stats, String symbol) {
         super(name, coord, stats, symbol);
-     //   this.name = name;
         this.coord = coord;
-   //     this.stats = stats;
         this.symbol = symbol;
-        // TODO Auto-generated constructor stub
+
     }
 
 
     public void move(Coordinates direction, Player player, Baby baby) {
-        TouchHer(player, baby);
+        touchHer(player, baby);
         if (isTouchingHer){
         int x = this.coord.getX() + direction.getX();
         int y = this.coord.getY() + direction.getY();
@@ -36,10 +33,20 @@ public class Baby extends Player {
         return coord;
     }
 
-    private void TouchHer(Player player, Baby baby){
+    private void touchHer(Player player, Baby baby){
         if (player.getCoord().getX()==baby.getCoord().getX() && player.getCoord().getY()==baby.getCoord().getY()){
             this.isTouchingHer = true;
     }
+}
+    public void setIsInHouse (Baby baby){
+        if (baby.getCoord().getX()==3 && baby.getCoord().getY()==2){
+            this.isInHouse = true;
+        }
+    }
+    public boolean getIsInHouse(Baby baby){
+        setIsInHouse(baby);
+        return this.isInHouse;
+    }
 
 }
-}
+
