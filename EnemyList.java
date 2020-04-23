@@ -13,7 +13,13 @@ public class EnemyList {
 
 
         Enemy bandit = new Enemy("bandit", new Coordinates(14,5), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83d\udc7a");
+        Enemy ogre = new Enemy("ogre", new Coordinates(14,10), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83d\udc79");
+        Enemy ghost = new Enemy("ghost", new Coordinates(26,8), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83d\udc7b");
 
+
+        enemys.add(bandit);
+        enemys.add(ogre);
+        enemys.add(ghost);
 
 
         Enemy crab = new Enemy("crab", new Coordinates(Common.randInt(),Common.randInt()), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd80");
@@ -27,7 +33,6 @@ public class EnemyList {
         Enemy crab9 = new Enemy("crab", new Coordinates(Common.randInt(),Common.randInt()), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd80");
         Enemy diablo = new Enemy("diablo", new Coordinates(14,19), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83d\udc79");
 
-        enemys.add(bandit);
 
 
 
@@ -41,6 +46,10 @@ public class EnemyList {
         enemys2.add(crab8);
         enemys2.add(crab9);
         enemys2.add(diablo);
+
+
+        
+
 
     }
 

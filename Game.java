@@ -13,8 +13,13 @@ class Game extends KeyAdapter {
     private Baby baby;
     private final int width = 30;
     private final int height = 30;
-
+        
     public Game() {
+
+
+
+        Common.printInstroduction();
+        baby = new Baby("baby", new Coordinates(5, 27), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udc83");
 
         enemys = new EnemyList();
         enemys2 = new EnemyList();
@@ -22,9 +27,12 @@ class Game extends KeyAdapter {
         gameElements2 = new GameElementsList();
         obstacles = new ObstaclesList();
         obstacles2 = new ObstaclesList();
-        player = new Player("Lolo", new Coordinates(2, 2), new Statistics(1, 0, 10, 10, 10, 5, 5, 5), "\ud83d\udd7a");
-        baby = new Baby("baby", new Coordinates(5, 27), new Statistics(1, 0, 10, 10, 10, 5, 5, 5), "\ud83d\udc83");
+
+        player = Common.createPlayer(player);
+        Common.clearScreen();
         Common.displayStats(player);
+        printBoard();
+
         Common.displayInventory(player);
         printBoard();
 
@@ -75,9 +83,9 @@ class Game extends KeyAdapter {
         board[this.baby.getCoord().getX()][this.baby.getCoord().getY()] = baby.getSymbol();
         }
 
-            printGameObjects(board);
-            printEnemys(board);
-            printObstacles(board);
+          printGameObjects(board);
+          printEnemys(board);
+          printObstacles(board);
 
 
 
@@ -160,6 +168,7 @@ class Game extends KeyAdapter {
                 }
             }
         }
+
 
     }
     }
