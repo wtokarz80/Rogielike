@@ -3,6 +3,7 @@ import java.util.List;
 
 public class ObstaclesList {
     private List<Obstacle> obstacles = new ArrayList<>();
+    private List<Obstacle> obstacles2 = new ArrayList<>();
 
     ObstaclesList(){
         createObstacles();
@@ -34,6 +35,17 @@ public class ObstaclesList {
 
 
 
+        Obstacle wall25 = new Obstacle("wall", "\ud83e\uddf1 ", new Coordinates(1, 16), 1, 3);
+        Obstacle wall26 = new Obstacle("wall", "\ud83e\uddf1 ", new Coordinates(5, 16), 1, 25);
+        Obstacle wall27 = new Obstacle("wall", "\ud83e\uddf1 ", new Coordinates(15, 1), 4, 1);
+        Obstacle wall28 = new Obstacle("wall", "\ud83e\uddf1 ", new Coordinates(15, 20), 10, 1);
+        Obstacle wall29 = new Obstacle("wall", "\ud83e\uddf1 ", new Coordinates(15, 6), 13, 1);
+        Obstacle toilet = new Obstacle("toilet", "\ud83d\udebd", new Coordinates(19, 15), 1, 1);
+        Obstacle bed = new Obstacle("bed", "\ud83d\udecf\ufe0f ", new Coordinates(28, 26), 1, 1);
+        Obstacle couch = new Obstacle("couch", "\ud83d\udecb\ufe0f ", new Coordinates(2, 25), 1, 1);
+        Obstacle lady = new Obstacle("lady", "\ud83d\udc83", new Coordinates(24, 22), 1, 1);
+
+
         this.obstacles.add(wall1);
         this.obstacles.add(wall2);
         this.obstacles.add(wall3);
@@ -52,6 +64,20 @@ public class ObstaclesList {
         this.obstacles.add(tree3);
         this.obstacles.add(door);
         this.obstacles.add(hause);
+
+        this.obstacles2.add(wall25);
+        this.obstacles2.add(wall26);
+        this.obstacles2.add(wall27);
+        this.obstacles2.add(wall28);
+        this.obstacles2.add(wall29);
+        this.obstacles2.add(toilet);
+        this.obstacles2.add(wall1);
+        this.obstacles2.add(wall2);
+        this.obstacles2.add(wall3);
+        this.obstacles2.add(wall4);
+        this.obstacles2.add(bed);
+        this.obstacles2.add(couch);
+        this.obstacles2.add(lady);
     
 
 
@@ -59,6 +85,10 @@ public class ObstaclesList {
 
     public List<Obstacle> getObstacles(){
         return obstacles;
+    }
+
+    public List<Obstacle> getObstacles2(){
+        return obstacles2;
     }
 
 }

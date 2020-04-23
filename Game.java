@@ -1,32 +1,32 @@
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-
 class Game extends KeyAdapter {
 
     private Player player;
     private EnemyList enemys;
+    private EnemyList enemys2;
     private ObstaclesList obstacles;
+    private ObstaclesList obstacles2;
     private GameElementsList gameElements;
+    private GameElementsList gameElements2;
     private Baby baby;
     private final int width = 30;
     private final int height = 30;
 
     public Game() {
-        baby = new Baby("baby", new Coordinates(5, 27), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udc83");
 
-        if (baby.getIsInHouse(baby) == false){
         enemys = new EnemyList();
+        enemys2 = new EnemyList();
         gameElements = new GameElementsList();
-        obstacles = new ObstaclesList();}
-
-        player = new Player("Lolo", new Coordinates(2,2), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udd7a");
+        gameElements2 = new GameElementsList();
+        obstacles = new ObstaclesList();
+        obstacles2 = new ObstaclesList();
+        player = new Player("Lolo", new Coordinates(2, 2), new Statistics(1, 0, 10, 10, 10, 5, 5, 5), "\ud83d\udd7a");
+        baby = new Baby("baby", new Coordinates(5, 27), new Statistics(1, 0, 10, 10, 10, 5, 5, 5), "\ud83d\udc83");
         Common.displayStats(player);
-
- 
-
-        printBoard();
         Common.displayInventory(player);
+        printBoard();
 
     }
 
@@ -71,13 +71,18 @@ class Game extends KeyAdapter {
     private void printBoard() {
         String[][] board = new String[width][height];
         board[this.player.getCoord().getX()][this.player.getCoord().getY()] = player.getSymbol();
-
-        if (baby.getIsInHouse(baby) == false){
+        if (baby.getIsInHouse(baby) == false) {
         board[this.baby.getCoord().getX()][this.baby.getCoord().getY()] = baby.getSymbol();
-        printGameObjects(board);
-        printEnemys(board);
-        printObstacles(board);
         }
+
+            printGameObjects(board);
+            printEnemys(board);
+            printObstacles(board);
+
+
+
+
+        
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 if (board[i][j] != null) {
@@ -90,7 +95,8 @@ class Game extends KeyAdapter {
         }
     }
 
-    private void printEnemys(String[][] board){
+    private void printEnemys(String[][] board) {
+        if (baby.getIsInHouse(baby) == false) {
         for (Enemy enemy : enemys.getEnemyList()) {
             if (player.getCoord().getX() == enemy.getCoord().getX()
                     && player.getCoord().getY() == enemy.getCoord().getY())
@@ -98,17 +104,38 @@ class Game extends KeyAdapter {
             board[enemy.getCoord().getX()][enemy.getCoord().getY()] = enemy.getSymbol();
         }
     }
+    else { for (Enemy enemy : enemys2.getEnemyList2()) {
+        if (player.getCoord().getX() == enemy.getCoord().getX()
+                && player.getCoord().getY() == enemy.getCoord().getY())
+            enemy.use(player);
+            board[enemy.getCoord().getX()][enemy.getCoord().getY()] = enemy.getSymbol();
+            }
+        }
+    }
 
-    private void printGameObjects(String[][] board){
+    private void printGameObjects(String[][] board) {
+        if (baby.getIsInHouse(baby) == false) {
         for (GameObject gameObject : gameElements.getGameElamenstList()) {
             if (this.player.getCoord().getX() == gameObject.getPivot().getX()
                     && this.player.getCoord().getY() == gameObject.getPivot().getY())
                 gameObject.use(player);
             board[gameObject.getPivot().getX()][gameObject.getPivot().getY()] = gameObject.getSymbol();
         }
+
     }
 
+    else {
+        for (GameObject gameObject : gameElements2.getGameElamenstList2()) {
+            if (this.player.getCoord().getX() == gameObject.getPivot().getX()
+                    && this.player.getCoord().getY() == gameObject.getPivot().getY())
+                gameObject.use(player);
+            board[gameObject.getPivot().getX()][gameObject.getPivot().getY()] = gameObject.getSymbol();
+    }
+    }
+}
+
     private void printObstacles(String[][] board) {
+        if (baby.getIsInHouse(baby) == false) {
         for (Obstacle obstacle : obstacles.getObstacles()) {
             int width = obstacle.getWidth();
             int height = obstacle.getHeight();
@@ -121,16 +148,40 @@ class Game extends KeyAdapter {
             }
         }
     }
+    else {
+        for (Obstacle obstacle : obstacles2.getObstacles2()) {
+            int width = obstacle.getWidth();
+            int height = obstacle.getHeight();
+            Coordinates pivot = obstacle.getPivot();
 
-    public boolean canPlayerMove(Coordinates coord) {
-        for (Obstacle obstacle : obstacles.getObstacles()) {
-            if (isPlayerInRange(obstacle, coord)) {
-                obstacle.use(player);
-                return false;
+            for (int i = pivot.getX(); i < pivot.getX() + height; i++) {
+                for (int j = pivot.getY(); j < pivot.getY() + width; j++) {
+                    board[i][j] = obstacle.getSymbol();
+                }
             }
         }
 
+    }
+    }
+  
 
+    public boolean canPlayerMove(Coordinates coord) {
+        if (baby.getIsInHouse(baby) == false) {
+            for (Obstacle obstacle : obstacles.getObstacles()) {
+                if (isPlayerInRange(obstacle, coord)) {
+                    obstacle.use(player);
+                    return false;
+                }
+            }
+        }
+        if (baby.getIsInHouse(baby) == true) {
+            for (Obstacle obstacle : obstacles2.getObstacles2()) {
+                if (isPlayerInRange(obstacle, coord)) {
+                    obstacle.use(player);
+                    return false;
+                }
+            }
+        }
 
         return true;
     }
@@ -146,30 +197,30 @@ class Game extends KeyAdapter {
     }
 
     // public void Experience_get_and_lvl_Up() { // Will change later
-    //     player.stats.exp += 3;
-    //     if (player.stats.exp >= player.stats.expToLvl) {
-    //         int experience_left = player.stats.exp - player.stats.expToLvl;
-    //         player.stats.exp = 0 + experience_left;
-    //         player.stats.expToLvl += 10;
-    //         player.stats.lvl += 1;
-    //         player.stats.maxHP += 2;
-    //         player.stats.currentHP += 2;
+    // player.stats.exp += 3;
+    // if (player.stats.exp >= player.stats.expToLvl) {
+    // int experience_left = player.stats.exp - player.stats.expToLvl;
+    // player.stats.exp = 0 + experience_left;
+    // player.stats.expToLvl += 10;
+    // player.stats.lvl += 1;
+    // player.stats.maxHP += 2;
+    // player.stats.currentHP += 2;
 
-    //     }   
+    // }
     // }
 
     // public void Taking_dmg_and_death(){
-    //     player.stats.currentHP -= 2;
-    //     if (player.stats.currentHP <= 0){
-    //         Common.clearScreen();
-    //         System.out.println("Game over");
-    //     }
+    // player.stats.currentHP -= 2;
+    // if (player.stats.currentHP <= 0){
+    // Common.clearScreen();
+    // System.out.println("Game over");
+    // }
     // }
 
     // public void Healing(){
-    //     player.stats.currentHP += 1;
-    //     if (player.stats.currentHP >= player.stats.maxHP){
-    //         player.stats.currentHP = player.stats.maxHP;
-    //     }
+    // player.stats.currentHP += 1;
+    // if (player.stats.currentHP >= player.stats.maxHP){
+    // player.stats.currentHP = player.stats.maxHP;
+    // }
     // }
 }

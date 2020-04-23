@@ -3,6 +3,7 @@ import java.util.List;
 
 public class GameElementsList {
     private List<GameObject> gameElements = new ArrayList<>();
+    private List<GameObject> gameElements2 = new ArrayList<>();
 
     GameElementsList(){
         createGameElementsList();
@@ -30,5 +31,8 @@ public class GameElementsList {
 
     public List<GameObject> getGameElamenstList(){
         return gameElements;
+    }
+    public List<GameObject> getGameElamenstList2(){
+        return gameElements2;
     }
 }

@@ -11,6 +11,11 @@ public class Obstacle extends GameObject{
         if (super.getName().equals("tree")){
             player.setSymbol("\ud83c\udf2d");
         }
+        else if (super.getName().equals("lady")){
+            player.setSymbol("\ud83d\udc74");
+            super.setSymbol("\ud83d\udc75");
+            System.out.println("Game just ended my friend!");
+        }
         else if (super.getName().equals("door")) {
             if (player.getInventory().containsKey("key") == false){
                 System.out.println("You need a key.");

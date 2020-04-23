@@ -1,5 +1,8 @@
 
+import java.util.Random;
+
 public class Common {
+    Random rand = new Random();
 
     public static void clearScreen() {
         try {
@@ -25,4 +28,11 @@ public class Common {
             System.out.print(key + ": " + player.getInventory().get(key) + " ");
         }
     }
+
+    public static Integer randInt(){
+        Random rand = new Random();
+        return rand.nextInt(26) + 2;
+        
+    }
+    
 }
