@@ -12,8 +12,8 @@ public class ObstaclesList {
         int width = 30;
         int height = 30;
 
-        Obstacle wall1 = new Obstacle("wall", "\ud83e\uddf1 ", new Coordinates(0, 0), width, 1);
-        Obstacle wall2 = new Obstacle("wall", "\ud83e\uddf1 ", new Coordinates(0, 0), 1, height);
+        Obstacle wall1 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(0, 0), width, 1);
+        Obstacle wall2 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(0, 0), 1, height);
         Obstacle wall3 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(width-1, 0), width, 1);
         Obstacle wall4 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(0, height-1), 1, height-1);
         Obstacle wall5 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(1, 25), 1, 10);

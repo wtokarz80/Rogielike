@@ -13,15 +13,12 @@ class Game extends KeyAdapter {
     private final int height = 30;
 
     public Game() {
+        player = Common.createPlayer(player);
         enemys = new EnemyList();
         gameElements = new GameElementsList();
         obstacles = new ObstaclesList();
-
-        player = new Player("Lolo", new Coordinates(2,2), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udd7a");
         Common.displayStats(player);
-
         baby = new Baby("baby", new Coordinates(5, 27), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udc83");
-
         printBoard();
         Common.displayInventory(player);
 
