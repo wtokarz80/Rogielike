@@ -40,7 +40,6 @@ public class Common {
         
     }
     
-}
 
     public static String gatherName(String title){
         System.out.print(title);

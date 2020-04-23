@@ -13,7 +13,7 @@ public class EnemyList {
 
 
         Enemy bandit = new Enemy("bandit", new Coordinates(14,5), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83d\udc7a");
-        Enemy ogre = new Enemy("ogre", new Coordinates(14,10), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83d\udc79");
+        Enemy ogre = new Enemy("ogre", new Coordinates(14,10), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd8d");
         Enemy ghost = new Enemy("ghost", new Coordinates(26,8), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83d\udc7b");
 
 
