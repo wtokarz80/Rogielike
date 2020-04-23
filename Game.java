@@ -9,7 +9,6 @@ class Game extends KeyAdapter {
     private ObstaclesList obstacles;
     private GameElementsList gameElements;
     private Baby baby;
-    // private GameObject door;
     private final int width = 30;
     private final int height = 30;
 
@@ -22,7 +21,6 @@ class Game extends KeyAdapter {
         Common.displayStats(player);
 
         baby = new Baby("baby", new Coordinates(5, 27), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udc83");
-        // door = new Door("door", "\ud83d\udeaa", new Coordinates(10, 26), 1, 1);
 
         printBoard();
         Common.displayInventory(player);
@@ -70,7 +68,6 @@ class Game extends KeyAdapter {
     private void printBoard() {
         String[][] board = new String[width][height];
         board[this.player.getCoord().getX()][this.player.getCoord().getY()] = player.getSymbol();
-        // board[this.door.getPivot().getX()][this.door.getPivot().getY()] = door.getSymbol();
         board[this.baby.getCoord().getX()][this.baby.getCoord().getY()] = baby.getSymbol();
 
         printGameObjects(board);
@@ -128,15 +125,6 @@ class Game extends KeyAdapter {
                 return false;
             }
         }
-
-        // if (isPlayerInRange(baby, coord)) {
-        //     key.use(player);
-        //     return false;
-        // }
-
-        // if (isPlayerInRange(door, coord) && Player.getInventory().containsKey("key") == false){
-        //     return false;
-        // }
         return true;
     }
 
