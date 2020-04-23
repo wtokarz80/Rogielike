@@ -11,14 +11,16 @@ class Game extends KeyAdapter {
     private Baby baby;
     private final int width = 30;
     private final int height = 30;
-
+        
     public Game() {
-        player = Common.createPlayer(player);
+        Common.printInstroduction();
+        baby = new Baby("baby", new Coordinates(5, 27), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udc83");
         enemys = new EnemyList();
         gameElements = new GameElementsList();
         obstacles = new ObstaclesList();
+        player = Common.createPlayer(player);
+        Common.clearScreen();
         Common.displayStats(player);
-        baby = new Baby("baby", new Coordinates(5, 27), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udc83");
         printBoard();
         Common.displayInventory(player);
 
@@ -65,12 +67,14 @@ class Game extends KeyAdapter {
     private void printBoard() {
         String[][] board = new String[width][height];
         board[this.player.getCoord().getX()][this.player.getCoord().getY()] = player.getSymbol();
-        board[this.baby.getCoord().getX()][this.baby.getCoord().getY()] = baby.getSymbol();
 
+
+        if (baby.getIsInHouse(baby) == false){ //but works here fine
+        board[this.baby.getCoord().getX()][this.baby.getCoord().getY()] = baby.getSymbol();
         printGameObjects(board);
         printEnemys(board);
         printObstacles(board);
-
+        }
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 if (board[i][j] != null) {
@@ -122,6 +126,7 @@ class Game extends KeyAdapter {
                 return false;
             }
         }
+
         return true;
     }
 

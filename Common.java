@@ -56,4 +56,46 @@ public class Common {
         return player;
         
     }
+
+    public static void printInstroduction(){
+        clearScreen();
+        System.out.println("                              RESCUE 2               ");
+        String introduction =  "\n    Welcome HERO. Have you always dreamt of fame, power and waelth?\n"
+                           + "Nothing simpler. Release the proncess kidnapped by the evil sorcerer\n"
+                           + "and bring her to the castle, than your dreams will come true.\n"
+                           + "LET'S GO!. \n\n";
+
+                    
+        for (int i = 0; i < introduction.length(); i++){
+                System.out.print(introduction.charAt(i));
+                wait(30);
+        }
+        // System.out.println(introduction);
+
+        emptyInput();
+    }
+
+    public static void emptyInput(){
+        scan.useDelimiter(System.lineSeparator());
+        System.out.println("\nPress enter...");
+        scan.nextLine();
+        clearScreen();
+    }
+
+    public static void wait(int ms){
+        try
+        {
+            Thread.sleep(ms);
+        }
+        catch(InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
+        }
+    }
 }
+
+            // System.out.print("THINKING ");
+            // for(int i = 0; i < 10; i++){
+            //     System.out.print("\u25AE");
+            //     Common.wait(100);
+            // }

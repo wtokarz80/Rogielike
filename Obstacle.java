@@ -20,7 +20,6 @@ public class Obstacle extends GameObject{
                 super.setSymbol("\ud83e\uddf1");
             }
         }
-
     }
 
 
