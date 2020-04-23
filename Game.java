@@ -1,6 +1,6 @@
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
+import java.io.IOException;
 
 class Game extends KeyAdapter {
 
@@ -13,23 +13,27 @@ class Game extends KeyAdapter {
     private final int height = 30;
 
     public Game() {
+        baby = new Baby("baby", new Coordinates(5, 27), new Statistics(1, 0, 10, 10, 10, 5, 5, 5), "\ud83d\udc83");
         enemys = new EnemyList();
         gameElements = new GameElementsList();
         obstacles = new ObstaclesList();
-
-        player = new Player("Lolo", new Coordinates(2,2), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udd7a");
-        Common.displayStats(player);
-
-        baby = new Baby("baby", new Coordinates(5, 27), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udc83");
-
+        player = Ui.createPlayer(player);
+        Ui.clearScreen();
+        Ui.displayStats(player);
         printBoard();
-        Common.displayInventory(player);
+        Ui.displayInventory(player);
 
     }
 
     @Override
     public void keyPressed(KeyEvent event) {
-        Common.clearScreen();
+        Ui.clearScreen();
+        try {
+            isPlayerAlive(player);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         char ch = event.getKeyChar();
         System.out.println((int) ch);
 
@@ -59,21 +63,32 @@ class Game extends KeyAdapter {
                 }
                 break;
         }
-
-        Common.displayStats(player);
+        Ui.displayStats(player);
         printBoard();
-        Common.displayInventory(player);
+        Ui.displayInventory(player);
+    }
+
+    private void isPlayerAlive(Player player) throws IOException {
+        if (player.getStats().getCurrentHP() <= 0){
+            Ui.clearScreen();
+            System.out.println("\n        YOU LOSE\n");
+            System.out.println("Press enter to continue...");
+            Ui.scan.next();
+            System.exit(0);
+        }
     }
 
     private void printBoard() {
         String[][] board = new String[width][height];
         board[this.player.getCoord().getX()][this.player.getCoord().getY()] = player.getSymbol();
-        board[this.baby.getCoord().getX()][this.baby.getCoord().getY()] = baby.getSymbol();
 
+
+        if (baby.getIsInHouse(baby) == false){ //but works here fine
+        board[this.baby.getCoord().getX()][this.baby.getCoord().getY()] = baby.getSymbol();
         printGameObjects(board);
         printEnemys(board);
         printObstacles(board);
-
+        }
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 if (board[i][j] != null) {
@@ -125,6 +140,7 @@ class Game extends KeyAdapter {
                 return false;
             }
         }
+
         return true;
     }
 
