@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
+import java.util.Random;
+
 public class Common {
+    Random rand = new Random();
 
     public static Scanner scan = new Scanner(System.in);
 
@@ -29,6 +32,15 @@ public class Common {
             System.out.print(key + ": " + player.getInventory().get(key) + " ");
         }
     }
+
+
+    public static Integer randInt(){
+        Random rand = new Random();
+        return rand.nextInt(26) + 2;
+        
+    }
+    
+}
 
     public static String gatherName(String title){
         System.out.print(title);
@@ -99,3 +111,4 @@ public class Common {
             //     System.out.print("\u25AE");
             //     Common.wait(100);
             // }
+
