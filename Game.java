@@ -15,7 +15,7 @@ class Game extends KeyAdapter {
     public Game() {
         baby = new Baby("baby", new Coordinates(5, 27), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udc83");
 
-        if (baby.getIsInHouse(baby) == false){
+        if (baby.getIsInHouse(baby) == false){ //this feature doesn't work here
         enemys = new EnemyList();
         gameElements = new GameElementsList();
         obstacles = new ObstaclesList();}
@@ -23,7 +23,7 @@ class Game extends KeyAdapter {
         player = new Player("Lolo", new Coordinates(2,2), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udd7a");
         Common.displayStats(player);
 
- 
+
 
         printBoard();
         Common.displayInventory(player);
@@ -72,7 +72,8 @@ class Game extends KeyAdapter {
         String[][] board = new String[width][height];
         board[this.player.getCoord().getX()][this.player.getCoord().getY()] = player.getSymbol();
 
-        if (baby.getIsInHouse(baby) == false){
+
+        if (baby.getIsInHouse(baby) == false){ //but works here fine
         board[this.baby.getCoord().getX()][this.baby.getCoord().getY()] = baby.getSymbol();
         printGameObjects(board);
         printEnemys(board);
@@ -129,8 +130,6 @@ class Game extends KeyAdapter {
                 return false;
             }
         }
-
-
 
         return true;
     }
