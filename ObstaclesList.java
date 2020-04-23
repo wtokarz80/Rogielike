@@ -30,6 +30,8 @@ public class ObstaclesList {
         Obstacle tree3 = new Obstacle ("tree", "\ud83c\udf32", new Coordinates(9, 13), 1, 2);
         Obstacle door = new Obstacle("door", "\ud83d\udeaa", new Coordinates(10, 26), 1, 1);
         Obstacle hause = new Obstacle("hause", "\ud83c\udfe0", new Coordinates(3, 2), 1, 1);
+        Obstacle boss = new Obstacle("boss", "\ud83e\uddd9", new Coordinates(21, 18), 1, 1);
+
         
 
 
@@ -52,6 +54,7 @@ public class ObstaclesList {
         this.obstacles.add(tree3);
         this.obstacles.add(door);
         this.obstacles.add(hause);
+        this.obstacles.add(boss);
     
 
 
