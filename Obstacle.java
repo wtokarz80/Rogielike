@@ -45,6 +45,7 @@ public class Obstacle extends GameObject {
 
     public void bossAction(Player player) {
         if (player.getStats().getLvl() >= 2) {
+            
             int newHP = player.getStats().getCurrentHP() - 7;
             int newExp = player.getStats().getExp() + 7;
             player.getStats().setCurrentHP(newHP);
