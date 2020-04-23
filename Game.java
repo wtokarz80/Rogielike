@@ -137,32 +137,4 @@ class Game extends KeyAdapter {
 
         return x >= pivot.getX() && x < pivot.getX() + height && y >= pivot.getY() && y < pivot.getY() + width;
     }
-
-    // public void Experience_get_and_lvl_Up() { // Will change later
-    //     player.stats.exp += 3;
-    //     if (player.stats.exp >= player.stats.expToLvl) {
-    //         int experience_left = player.stats.exp - player.stats.expToLvl;
-    //         player.stats.exp = 0 + experience_left;
-    //         player.stats.expToLvl += 10;
-    //         player.stats.lvl += 1;
-    //         player.stats.maxHP += 2;
-    //         player.stats.currentHP += 2;
-
-    //     }   
-    // }
-
-    // public void Taking_dmg_and_death(){
-    //     player.stats.currentHP -= 2;
-    //     if (player.stats.currentHP <= 0){
-    //         Common.clearScreen();
-    //         System.out.println("Game over");
-    //     }
-    // }
-
-    // public void Healing(){
-    //     player.stats.currentHP += 1;
-    //     if (player.stats.currentHP >= player.stats.maxHP){
-    //         player.stats.currentHP = player.stats.maxHP;
-    //     }
-    // }
 }

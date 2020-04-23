@@ -1,5 +1,6 @@
 
 public class Common {
+    private static Player player;
 
     public static void clearScreen() {
         try {
@@ -19,7 +20,7 @@ public class Common {
         System.out.println(title);
     }
 
-    public static void displayInventory(Player player){
+    public static void displayInventory(Player player) {
         System.out.println("Your inventory:");
         for (String key : player.getInventory().keySet()) {
             System.out.print(key + ": " + player.getInventory().get(key) + " ");
