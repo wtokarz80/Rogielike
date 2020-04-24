@@ -169,7 +169,7 @@ public class Enemy extends Character {
     
 
     public void ogreFight(Player player) {
-        Statistics ogre = new Statistics(1, 0, 5, 5, 5, 5, 5, 5);
+        Statistics ogre = new Statistics(1, 0, 5, 5, 5, 4, 4, 4);
         int bonusDef = 0;
         System.out.println("Wild Ogre appeard !");
         boolean fight = true;
@@ -177,7 +177,6 @@ public class Enemy extends Character {
             System.out.println("Your Hp: " + player.getStats().currentHP + "/ " + player.getStats().maxHP);
             System.out.println("Enemy hp: " + ogre.currentHP + "/" + ogre.maxHP);
             System.out.println("What you want to do ? \n1.Attack \n" + "2.Defence \n3.Try to escape");
-            Scanner action = new Scanner(System.in);
             String actions = action.nextLine();
 
             switch (actions) {
