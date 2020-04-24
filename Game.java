@@ -1,5 +1,6 @@
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 class Game extends KeyAdapter {
 
@@ -13,34 +14,32 @@ class Game extends KeyAdapter {
     private Baby baby;
     private final int width = 30;
     private final int height = 30;
-        
+
     public Game() {
-
-
-
-        Common.printInstroduction();
-        baby = new Baby("baby", new Coordinates(5, 27), new Statistics(1,0,10,10,10, 5, 5, 5), "\ud83d\udc83");
-
+        baby = new Baby("baby", new Coordinates(5, 27), new Statistics(1, 0, 10, 10, 10, 5, 5, 5), "\ud83d\udc83");
         enemys = new EnemyList();
         enemys2 = new EnemyList();
         gameElements = new GameElementsList();
         gameElements2 = new GameElementsList();
         obstacles = new ObstaclesList();
+        player = Ui.createPlayer(player);
         obstacles2 = new ObstaclesList();
-
-        player = Common.createPlayer(player);
-        Common.clearScreen();
-        Common.displayStats(player);
+        Ui.clearScreen();
+        Ui.displayStats(player);
         printBoard();
-
-        Common.displayInventory(player);
-        printBoard();
+        Ui.displayInventory(player);
 
     }
 
     @Override
     public void keyPressed(KeyEvent event) {
-        Common.clearScreen();
+        Ui.clearScreen();
+        try {
+            isPlayerAlive(player);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         char ch = event.getKeyChar();
         System.out.println((int) ch);
 
@@ -70,10 +69,19 @@ class Game extends KeyAdapter {
                 }
                 break;
         }
-
-        Common.displayStats(player);
+        Ui.displayStats(player);
         printBoard();
-        Common.displayInventory(player);
+        Ui.displayInventory(player);
+    }
+
+    private void isPlayerAlive(Player player) throws IOException {
+        if (player.getStats().getCurrentHP() <= 0){
+            Ui.clearScreen();
+            System.out.println("\n        YOU LOSE\n");
+            System.out.println("Press enter to continue...");
+            Ui.scan.next();
+            System.exit(0);
+        }
     }
 
     private void printBoard() {
@@ -204,32 +212,4 @@ class Game extends KeyAdapter {
 
         return x >= pivot.getX() && x < pivot.getX() + height && y >= pivot.getY() && y < pivot.getY() + width;
     }
-
-    // public void Experience_get_and_lvl_Up() { // Will change later
-    // player.stats.exp += 3;
-    // if (player.stats.exp >= player.stats.expToLvl) {
-    // int experience_left = player.stats.exp - player.stats.expToLvl;
-    // player.stats.exp = 0 + experience_left;
-    // player.stats.expToLvl += 10;
-    // player.stats.lvl += 1;
-    // player.stats.maxHP += 2;
-    // player.stats.currentHP += 2;
-
-    // }
-    // }
-
-    // public void Taking_dmg_and_death(){
-    // player.stats.currentHP -= 2;
-    // if (player.stats.currentHP <= 0){
-    // Common.clearScreen();
-    // System.out.println("Game over");
-    // }
-    // }
-
-    // public void Healing(){
-    // player.stats.currentHP += 1;
-    // if (player.stats.currentHP >= player.stats.maxHP){
-    // player.stats.currentHP = player.stats.maxHP;
-    // }
-    // }
 }

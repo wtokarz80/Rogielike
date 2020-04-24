@@ -13,24 +13,23 @@ public class EnemyList {
 
 
         Enemy bandit = new Enemy("bandit", new Coordinates(14,5), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83d\udc7a");
-        Enemy ogre = new Enemy("ogre", new Coordinates(14,10), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd8d");
+        Enemy ogre = new Enemy("ogre", new Coordinates(14,10), new Statistics(1, 0, 5, 5, 5, 5, 10, 5), "\ud83d\udc79");
         Enemy ghost = new Enemy("ghost", new Coordinates(26,8), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83d\udc7b");
 
-
+        
         enemys.add(bandit);
         enemys.add(ogre);
         enemys.add(ghost);
 
-
-        Enemy crab = new Enemy("crab", new Coordinates(Common.randInt(),Common.randInt()), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd80");
-        Enemy crab2 = new Enemy("crab", new Coordinates(Common.randInt(),Common.randInt()), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd80");
-        Enemy crab3 = new Enemy("crab", new Coordinates(Common.randInt(),Common.randInt()), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd80");
-        Enemy crab4 = new Enemy("crab", new Coordinates(Common.randInt(),Common.randInt()), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd80");
-        Enemy crab5 = new Enemy("crab", new Coordinates(Common.randInt(),Common.randInt()), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd80");
-        Enemy crab6 = new Enemy("crab", new Coordinates(Common.randInt(),Common.randInt()), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd80");
-        Enemy crab7 = new Enemy("crab", new Coordinates(Common.randInt(),Common.randInt()), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd80");
-        Enemy crab8 = new Enemy("crab", new Coordinates(Common.randInt(),Common.randInt()), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd80");
-        Enemy crab9 = new Enemy("crab", new Coordinates(Common.randInt(),Common.randInt()), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd80");
+        Enemy crab = new Enemy("crab", new Coordinates(Ui.randInt(),Ui.randInt()), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd80");
+        Enemy crab2 = new Enemy("crab", new Coordinates(Ui.randInt(),Ui.randInt()), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd80");
+        Enemy crab3 = new Enemy("crab", new Coordinates(Ui.randInt(),Ui.randInt()), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd80");
+        Enemy crab4 = new Enemy("crab", new Coordinates(Ui.randInt(),Ui.randInt()), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd80");
+        Enemy crab5 = new Enemy("crab", new Coordinates(Ui.randInt(),Ui.randInt()), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd80");
+        Enemy crab6 = new Enemy("crab", new Coordinates(Ui.randInt(),Ui.randInt()), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd80");
+        Enemy crab7 = new Enemy("crab", new Coordinates(Ui.randInt(),Ui.randInt()), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd80");
+        Enemy crab8 = new Enemy("crab", new Coordinates(Ui.randInt(),Ui.randInt()), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd80");
+        Enemy crab9 = new Enemy("crab", new Coordinates(Ui.randInt(),Ui.randInt()), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83e\udd80");
         Enemy diablo = new Enemy("diablo", new Coordinates(14,19), new Statistics(1, 0, 5, 5, 5, 5, 5, 5), "\ud83d\udc79");
 
 

@@ -12,7 +12,12 @@ public class Food extends GameObject{
         setPivot(new Coordinates(0, 0));
         setSymbol("\ud83e\uddf1 ");
         int playerHP = player.getStats().getCurrentHP() + increaseHP;
+        if (playerHP >= player.getStats().getMaxHP()){
+            playerHP = player.getStats().getMaxHP();
+        }
         player.getStats().setCurrentHP(playerHP);
+        
+
     }
         
     }

@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class Player {
     private String name;
+    private boolean isAlive;
     private Coordinates coord;
     private Statistics stats;
     private String symbol;
@@ -19,6 +20,7 @@ public class Player {
         // this.coord = new Coordinates(5,5);
         // this.stats = new Statistics(1,0,10,10,10, 5, 5, 5);
         this.inventory = new HashMap<>();
+        this.isAlive = true;
 
     }
 
@@ -57,6 +59,18 @@ public class Player {
 
     public void setSymbol(String symbol){
         this.symbol = symbol;
+    }
+
+    public boolean isAlive() {
+        return this.isAlive;
+    }
+
+    public boolean getIsAlive(){
+        return this.isAlive;
+    }
+    
+    public void setIsAlive(boolean isAlive){
+        this.isAlive = isAlive;
     }
 
     public Statistics getStats(){
