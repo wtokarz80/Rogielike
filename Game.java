@@ -153,5 +153,4 @@ class Game extends KeyAdapter {
 
         return x >= pivot.getX() && x < pivot.getX() + height && y >= pivot.getY() && y < pivot.getY() + width;
     }
-
 }

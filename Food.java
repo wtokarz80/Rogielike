@@ -16,6 +16,8 @@ public class Food extends GameObject{
             playerHP = player.getStats().getMaxHP();
         }
         player.getStats().setCurrentHP(playerHP);
+        
+
     }
         
     }
