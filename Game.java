@@ -25,7 +25,8 @@ class Game extends KeyAdapter {
         player = Ui.createPlayer(player);
         userInterface= new Ui();
         Ui.clearScreen();
-        Ui.displayStats(player);
+        System.out.println("Your stats " + player.getName());
+        player.getStats().toString(); 
         printBoard();
         Ui.displayInventory(player);
     }
@@ -46,7 +47,7 @@ class Game extends KeyAdapter {
         }
 
         char ch = event.getKeyChar();
-        System.out.println((int) ch);
+        // System.out.println((int) ch);
 
         switch (ch) {
             case 'w':
@@ -74,7 +75,8 @@ class Game extends KeyAdapter {
                 }
                 break;
         }
-        Ui.displayStats(player);
+        System.out.println("Your stats " + player.getName());
+        player.getStats().toString();
         printBoard();
         Ui.displayInventory(player);
     }
@@ -86,7 +88,6 @@ class Game extends KeyAdapter {
             System.out.println("Press enter to continue...");
             Ui.scan.next();
             userInterface.gameMenu();
-            
         }
     }
 

@@ -20,7 +20,7 @@ public class Player {
     }
 
     public void move(Coordinates direction) {
-        System.out.println(direction.toString());
+        // System.out.println(direction.toString());
         int x = this.coord.getX() + direction.getX();
         int y = this.coord.getY() + direction.getY();
         this.coord = new Coordinates(x, y);

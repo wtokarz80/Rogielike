@@ -75,7 +75,15 @@ public class Statistics {
 
     public void setDef(int def){
         this.def = def;
+    }
 
+    public String toString(){
+        String stats = String.format(
+                "LEVEL: %d\n" + "HP: %d\n" + "STR = %d\n" + "ATTACK = %d\n" + "DEF = %d\n"
+                        + "EXP = %d / %d",
+                getLvl(), getCurrentHP(), getStr(), getAttack(), getDef(), getExp(), getExpToLvl());
+        System.out.println(stats);
+        return stats;
     }
 
 }
