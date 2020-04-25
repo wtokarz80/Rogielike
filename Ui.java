@@ -32,7 +32,7 @@ public class Ui {
                     printIntroduction();
                     break;
                 case 0:
-                    keepGoing = false;
+                    System.exit(0);
                     break;
             }
         }
@@ -93,12 +93,6 @@ public class Ui {
                            + "Nothing simpler. Release the proncess kidnapped by the evil sorcerer\n"
                            + "and bring her to the castle, than your dreams will come true.\n"
                            + "LET'S GO!. \n\n";
-
-                    
-        // for (int i = 0; i < introduction.length(); i++){
-        //         System.out.print(introduction.charAt(i));
-        //         wait(30);
-        // }
         System.out.println(introduction);
         emptyInput();
     }

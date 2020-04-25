@@ -1,6 +1,4 @@
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Player {
@@ -9,7 +7,6 @@ public class Player {
     private Coordinates coord;
     private Statistics stats;
     private String symbol;
-    // private String symbol = "\ud83d\udd7a";
     private Map<String, Integer> inventory;
 
     public Player(String name, Coordinates coord, Statistics stats, String symbol) {
@@ -17,8 +14,6 @@ public class Player {
         this.symbol = symbol;
         this.coord = coord;
         this.stats = stats;
-        // this.coord = new Coordinates(5,5);
-        // this.stats = new Statistics(1,0,10,10,10, 5, 5, 5);
         this.inventory = new HashMap<>();
         this.isAlive = true;
 

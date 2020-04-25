@@ -8,18 +8,6 @@ public class Obstacle extends GameObject {
 
     @Override
     public void use(Player player) {
-        // if (super.getName().equals("tree")){
-        // player.setSymbol("\ud83c\udf2d");
-        // }
-        // else if (super.getName().equals("door")) {
-        // if (player.getInventory().containsKey("key") == false){
-        // System.out.println("You need a key.");
-        // }
-        // else{
-        // super.setPivot(new Coordinates(0, 0));
-        // super.setSymbol("\ud83e\uddf1");
-        // }
-        // }
 
         switch (super.getName()) {
             case "door":
@@ -48,9 +36,7 @@ public class Obstacle extends GameObject {
             super.setSymbol("\ud83d\udc75");
             Ui.clearScreen();
             System.out.println("\n        YOU WON\n");
-            System.out.println("Press enter to continue...");
-            Ui.scan.next();
-        System.out.println("Game just ended my friend!");
+            System.out.println("Game just ended my friend!");
     }
 
 

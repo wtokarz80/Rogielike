@@ -1,29 +1,29 @@
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.List;
 
 class Game extends KeyAdapter {
 
     private Player player;
     private EnemyList enemys;
-    private EnemyList enemys2;
     private ObstaclesList obstacles;
-    private ObstaclesList obstacles2;
     private GameElementsList gameElements;
-    private GameElementsList gameElements2;
     private Baby baby;
+    private Ui userInterface; 
+    private List<Enemy> enemysList;
+    private List<Obstacle> obstaclesList;
+    private List<GameObject> gameElementsList;
     private final int width = 30;
     private final int height = 30;
 
     public Game() {
         baby = new Baby("baby", new Coordinates(5, 27), new Statistics(1, 0, 10, 10, 10, 5, 5, 5), "\ud83d\udc83");
         enemys = new EnemyList();
-        enemys2 = new EnemyList();
         gameElements = new GameElementsList();
-        gameElements2 = new GameElementsList();
         obstacles = new ObstaclesList();
         player = Ui.createPlayer(player);
-        obstacles2 = new ObstaclesList();
+        userInterface= new Ui();
         Ui.clearScreen();
         Ui.displayStats(player);
         printBoard();
@@ -44,7 +44,7 @@ class Game extends KeyAdapter {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         char ch = event.getKeyChar();
         System.out.println((int) ch);
 
@@ -85,7 +85,8 @@ class Game extends KeyAdapter {
             System.out.println("\n   End they lived happily ever after...     \n");
             System.out.println("Press enter to continue...");
             Ui.scan.next();
-            System.exit(0);
+            userInterface.gameMenu();
+            
         }
     }
 
@@ -95,7 +96,7 @@ class Game extends KeyAdapter {
             System.out.println("\n        YOU LOSE\n");
             System.out.println("Press enter to continue...");
             Ui.scan.next();
-            System.exit(0);
+            userInterface.gameMenu();
         }
     }
 
@@ -124,87 +125,61 @@ class Game extends KeyAdapter {
 
     private void printEnemys(String[][] board) {
         if (baby.getIsInHouse(baby) == false) {
-            for (Enemy enemy : enemys.getEnemyList()) {
-                if (player.getCoord().getX() == enemy.getCoord().getX()
-                        && player.getCoord().getY() == enemy.getCoord().getY())
-                    enemy.use(player);
-                board[enemy.getCoord().getX()][enemy.getCoord().getY()] = enemy.getSymbol();
-            }
+            enemysList = enemys.getEnemys1();
         } else {
-            for (Enemy enemy : enemys2.getEnemyList2()) {
-                if (player.getCoord().getX() == enemy.getCoord().getX()
-                        && player.getCoord().getY() == enemy.getCoord().getY())
-                    enemy.use(player);
-                board[enemy.getCoord().getX()][enemy.getCoord().getY()] = enemy.getSymbol();
-            }
+            enemysList = enemys.getEnemys2();
+        }
+        for (Enemy enemy : enemysList) {
+            if (player.getCoord().getX() == enemy.getCoord().getX()
+                    && player.getCoord().getY() == enemy.getCoord().getY())
+                enemy.use(player);
+            board[enemy.getCoord().getX()][enemy.getCoord().getY()] = enemy.getSymbol();
         }
     }
 
     private void printGameObjects(String[][] board) {
         if (baby.getIsInHouse(baby) == false) {
-            for (GameObject gameObject : gameElements.getGameElamenstList()) {
-                if (this.player.getCoord().getX() == gameObject.getPivot().getX()
-                        && this.player.getCoord().getY() == gameObject.getPivot().getY())
-                    gameObject.use(player);
-                board[gameObject.getPivot().getX()][gameObject.getPivot().getY()] = gameObject.getSymbol();
-            }
-
+            gameElementsList = gameElements.getGametElements1();
+        } else {
+            gameElementsList = gameElements.getGameElements2();
         }
-
-        else {
-            for (GameObject gameObject : gameElements2.getGameElamenstList2()) {
-                if (this.player.getCoord().getX() == gameObject.getPivot().getX()
-                        && this.player.getCoord().getY() == gameObject.getPivot().getY())
-                    gameObject.use(player);
-                board[gameObject.getPivot().getX()][gameObject.getPivot().getY()] = gameObject.getSymbol();
-            }
+        for (GameObject gameObject : gameElementsList) {
+            if (this.player.getCoord().getX() == gameObject.getPivot().getX()
+                    && this.player.getCoord().getY() == gameObject.getPivot().getY())
+                gameObject.use(player);
+            board[gameObject.getPivot().getX()][gameObject.getPivot().getY()] = gameObject.getSymbol();
         }
     }
 
     private void printObstacles(String[][] board) {
         if (baby.getIsInHouse(baby) == false) {
-            for (Obstacle obstacle : obstacles.getObstacles()) {
-                int width = obstacle.getWidth();
-                int height = obstacle.getHeight();
-                Coordinates pivot = obstacle.getPivot();
-
-                for (int i = pivot.getX(); i < pivot.getX() + height; i++) {
-                    for (int j = pivot.getY(); j < pivot.getY() + width; j++) {
-                        board[i][j] = obstacle.getSymbol();
-                    }
-                }
-            }
+            obstaclesList = obstacles.getObstacles1();
         } else {
-            for (Obstacle obstacle : obstacles2.getObstacles2()) {
-                int width = obstacle.getWidth();
-                int height = obstacle.getHeight();
-                Coordinates pivot = obstacle.getPivot();
+            obstaclesList = obstacles.getObstacles2();
+        }
+        for (Obstacle obstacle : obstaclesList) {
+            int width = obstacle.getWidth();
+            int height = obstacle.getHeight();
+            Coordinates pivot = obstacle.getPivot();
 
-                for (int i = pivot.getX(); i < pivot.getX() + height; i++) {
-                    for (int j = pivot.getY(); j < pivot.getY() + width; j++) {
-                        board[i][j] = obstacle.getSymbol();
-                    }
+            for (int i = pivot.getX(); i < pivot.getX() + height; i++) {
+                for (int j = pivot.getY(); j < pivot.getY() + width; j++) {
+                    board[i][j] = obstacle.getSymbol();
                 }
             }
-
         }
     }
 
     public boolean canPlayerMove(Coordinates coord) {
         if (baby.getIsInHouse(baby) == false) {
-            for (Obstacle obstacle : obstacles.getObstacles()) {
-                if (isPlayerInRange(obstacle, coord)) {
-                    obstacle.use(player);
-                    return false;
-                }
-            }
+            obstaclesList = obstacles.getObstacles1();
+        } else {
+            obstaclesList = obstacles.getObstacles2();
         }
-        if (baby.getIsInHouse(baby) == true) {
-            for (Obstacle obstacle : obstacles2.getObstacles2()) {
-                if (isPlayerInRange(obstacle, coord)) {
-                    obstacle.use(player);
-                    return false;
-                }
+        for (Obstacle obstacle : obstaclesList) {
+            if (isPlayerInRange(obstacle, coord)) {
+                obstacle.use(player);
+                return false;
             }
         }
 

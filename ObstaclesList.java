@@ -2,16 +2,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ObstaclesList {
-    private List<Obstacle> obstacles = new ArrayList<>();
+    private List<Obstacle> obstacles1 = new ArrayList<>();
     private List<Obstacle> obstacles2 = new ArrayList<>();
+    private int width = 30;
+    private int height = 30;
 
     ObstaclesList(){
-        createObstacles();
+        createObstacles1();
+        createObstacles2();
+
     }
 
-    private void createObstacles(){
-        int width = 30;
-        int height = 30;
+    private void createObstacles1(){
+        
 
         Obstacle wall1 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(0, 0), width, 1);
         Obstacle wall2 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(0, 0), 1, height);
@@ -33,10 +36,34 @@ public class ObstaclesList {
         Obstacle hause = new Obstacle("hause", "\ud83c\udfe0", new Coordinates(3, 2), 1, 1);
         Obstacle boss = new Obstacle("boss", "\ud83e\uddd9", new Coordinates(21, 18), 1, 1);
 
-        
 
+        this.obstacles1.add(wall1);
+        this.obstacles1.add(wall2);
+        this.obstacles1.add(wall3);
+        this.obstacles1.add(wall4);
+        this.obstacles1.add(wall5);
+        this.obstacles1.add(wall6);
+        this.obstacles1.add(wall7);
+        this.obstacles1.add(wall8);
+        this.obstacles1.add(wall9);
+        this.obstacles1.add(wall10);
+        this.obstacles1.add(treeKey);
+        this.obstacles1.add(treeKey2);      
+        this.obstacles1.add(tree);
+        this.obstacles1.add(tree1);
+        this.obstacles1.add(tree2);
+        this.obstacles1.add(tree3);
+        this.obstacles1.add(door);
+        this.obstacles1.add(hause);
+        this.obstacles1.add(boss);
+    }
 
+    private void createObstacles2(){
 
+        Obstacle wall1 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(0, 0), width, 1);
+        Obstacle wall2 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(0, 0), 1, height);
+        Obstacle wall3 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(width-1, 0), width, 1);
+        Obstacle wall4 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(0, height-1), 1, height-1);
         Obstacle wall25 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(1, 16), 1, 3);
         Obstacle wall26 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(5, 16), 1, 25);
         Obstacle wall27 = new Obstacle("wall", "\ud83e\uddf1", new Coordinates(15, 1), 4, 1);
@@ -46,26 +73,6 @@ public class ObstaclesList {
         Obstacle bed = new Obstacle("bed", "\ud83d\udecf\ufe0f ", new Coordinates(28, 26), 1, 1);
         Obstacle couch = new Obstacle("couch", "\ud83d\udecb\ufe0f ", new Coordinates(2, 25), 1, 1);
         Obstacle lady = new Obstacle("lady", "\ud83d\udc83", new Coordinates(24, 22), 1, 1);
-
-
-        this.obstacles.add(wall1);
-        this.obstacles.add(wall2);
-        this.obstacles.add(wall3);
-        this.obstacles.add(wall4);
-        this.obstacles.add(wall5);
-        this.obstacles.add(wall6);
-        this.obstacles.add(wall7);
-        this.obstacles.add(wall8);
-        this.obstacles.add(wall9);
-        this.obstacles.add(wall10);
-        this.obstacles.add(treeKey);
-        this.obstacles.add(treeKey2);      
-        this.obstacles.add(tree);
-        this.obstacles.add(tree1);
-        this.obstacles.add(tree2);
-        this.obstacles.add(tree3);
-        this.obstacles.add(door);
-        this.obstacles.add(hause);
 
         this.obstacles2.add(wall25);
         this.obstacles2.add(wall26);
@@ -80,14 +87,11 @@ public class ObstaclesList {
         this.obstacles2.add(bed);
         this.obstacles2.add(couch);
         this.obstacles2.add(lady);
-        this.obstacles.add(boss);
-    
-
-
     }
 
-    public List<Obstacle> getObstacles(){
-        return obstacles;
+
+    public List<Obstacle> getObstacles1(){
+        return obstacles1;
     }
 
     public List<Obstacle> getObstacles2(){
