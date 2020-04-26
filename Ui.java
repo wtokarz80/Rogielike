@@ -76,11 +76,36 @@ public class Ui {
 
     public static Player createPlayer(Player player) {
         String name = gatherName("Enter your name hero: ");
-        int[] intStats = {5, 5, 5};
-        player = new Player(name, new Coordinates(2, 2),
+        int points = 15;
+        int checkPoints = 0;
+        int userInt = 0;
+        String[] stringStats = {"STR", "ATTACK", "DEF"};
+        int[] intStats = {0, 0, 0};
+        boolean isPointsLeft = true;
+        while(isPointsLeft){
+            for(int i = 0; i < intStats.length; i++){
+                clearScreen();
+                printHeader(name, points, stringStats, intStats, i);
+                userInt = gatherInt();
+                checkPoints = points - userInt;
+                if (checkPoints <= 0) {
+                    intStats[i] = intStats[i] + points;
+                    isPointsLeft = false;
+                    break;
+                }
+                points = checkPoints;
+                intStats[i] += userInt;
+            }
+        }
+        return new Player(name, new Coordinates(2, 2),
                 new Statistics(1, 0, 10, 10, 10, intStats[0], intStats[1], intStats[2]), "\ud83d\udd7a");
-        return player;
+    }
 
+    public static void printHeader(String name, int points, String[] stringStats, int[] intStats, int i){
+        System.out.printf("Set your atributes %s.\n\n", name);
+        System.out.printf("You have %d points to distribute\n\n", points);
+        System.out.printf("STR: %d    ATTACK: %d    DEF: %d    \n", intStats[0], intStats[1], intStats[2]);
+        System.out.printf("\nSet your %s: ", stringStats[i]);
     }
 
     public static void printIntroduction() {
@@ -107,6 +132,19 @@ public class Ui {
         clearScreen();
     }
 
+    public static int gatherInt() {
+        scan.useDelimiter(System.lineSeparator());
+        String userInput = "";
+        boolean validInput = false;
+        while (!validInput) {
+            userInput = scan.next();
+            if (isNumericValue(userInput)) {
+                validInput = true;
+            }
+        }
+        return Integer.parseInt(userInput);
+    }
+
     public int gatherIntInput(String title, int numberOfOptions) {
         scan.useDelimiter(System.lineSeparator());
         String userInput = "";
@@ -121,7 +159,7 @@ public class Ui {
         return Integer.parseInt(userInput);
     }
 
-    private boolean isNumericValue(String userInput) {
+    private static boolean isNumericValue(String userInput) {
         return !userInput.equals("") && userInput.matches("^[0-9]*$");
     }
 
