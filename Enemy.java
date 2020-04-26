@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.Random;
 
 public class Enemy extends Character {
     public Scanner action = new Scanner(System.in);

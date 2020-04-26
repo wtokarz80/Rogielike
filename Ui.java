@@ -76,7 +76,7 @@ public class Ui {
 
     public static Player createPlayer(Player player) {
         String name = gatherName("Enter your name hero: ");
-        int[] intStats = { 5, 5, 5 };
+        int[] intStats = {5, 5, 5};
         player = new Player(name, new Coordinates(2, 2),
                 new Statistics(1, 0, 10, 10, 10, intStats[0], intStats[1], intStats[2]), "\ud83d\udd7a");
         return player;
@@ -109,23 +109,25 @@ public class Ui {
 
     public int gatherIntInput(String title, int numberOfOptions) {
         scan.useDelimiter(System.lineSeparator());
-        int option = 0;
-        String userInput;
+        String userInput = "";
         System.out.print(title);
         boolean validInput = false;
         while (!validInput) {
             userInput = scan.next();
-            if (!userInput.equals("")) {
-                if (userInput.matches("^[0-9]*$")) {
-                    option = Integer.parseInt(userInput);
-                    if (option >= 0 && option < numberOfOptions) {
-                        validInput = true;
-                    }
-                }
+            if (isNumericValue(userInput) && isNumberInRange(userInput, numberOfOptions)) {
+                validInput = true;
             }
-
         }
-        return option;
+        return Integer.parseInt(userInput);
+    }
+
+    private boolean isNumericValue(String userInput) {
+        return !userInput.equals("") && userInput.matches("^[0-9]*$");
+    }
+
+    private boolean isNumberInRange(String userInput, int numberOfOptions) {
+        int option = Integer.parseInt(userInput);
+        return option >= 0 && option < numberOfOptions;
     }
 
     public String gatherStringInput(String title) {
